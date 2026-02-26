@@ -1,0 +1,16 @@
+{
+  "title": "Data Stories",
+  "subtitle": "Visualizations and narratives from public datasets",
+  "author": "Sunil Dhaka",
+  "stories": [
+    {
+      "id": "rajasthan-guar",
+      "title": "The Guar Story: Rajasthan's Desert Gold",
+      "description": "How a drought-resistant bean from the Thar Desert connects Rajasthan's farmers to America's oil rigs -- a $2.5B commodity that's cheapest where it's grown.",
+      "link": "rajasthan-guar/",
+      "screenshot": "rajasthan-guar/screenshot.png",
+      "date": "2026-02-26",
+      "folder": "rajasthan-guar"
+    }
+  ]
+}
