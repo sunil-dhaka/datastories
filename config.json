@@ -4,6 +4,15 @@
   "author": "Sunil Dhaka",
   "stories": [
     {
+      "id": "strong-towns-india",
+      "title": "India's Urban Growth Ponzi Scheme",
+      "description": "India is importing America's failed suburban development model while abandoning its own traditional cities -- which already embody everything the world's best urbanists now advocate.",
+      "link": "strong-towns-india/",
+      "screenshot": "strong-towns-india/screenshot.png",
+      "date": "2026-03-05",
+      "folder": "strong-towns-india"
+    },
+    {
       "id": "rajasthan-guar",
       "title": "The Guar Story: Rajasthan's Desert Gold",
       "description": "How a drought-resistant bean from the Thar Desert connects Rajasthan's farmers to America's oil rigs -- a $2.5B commodity that's cheapest where it's grown.",
