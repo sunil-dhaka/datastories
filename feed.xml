@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:ns0="http://www.w3.org/2005/Atom" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+  <channel>
+    <title>Data Stories</title>
+    <link>https://sunil-dhaka.github.io/datastories/</link>
+    <description>Visualizations and narratives from public datasets</description>
+    <language>en</language>
+    <lastBuildDate>2026-03-26T00:00:00+05:30</lastBuildDate>
+    <ns0:link href="https://sunil-dhaka.github.io/datastories/feed.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>India's Petroleum Appetite: 239 Million Tonnes and Climbing</title>
+      <link>https://sunil-dhaka.github.io/datastories/india-petroleum-consumption/</link>
+      <description>The world's third-largest oil consumer uses 1/22nd the oil per person that America does. Kerosene has collapsed 93%, India has overtaken China as the #1 source of oil demand growth, and 88% of crude is imported.</description>
+      <guid isPermaLink="true">https://sunil-dhaka.github.io/datastories/india-petroleum-consumption/</guid>
+      <pubDate>2026-03-26T00:00:00+05:30</pubDate>
+    </item>
+    <item>
+      <title>India's Urban Growth Ponzi Scheme</title>
+      <link>https://sunil-dhaka.github.io/datastories/strong-towns-india/</link>
+      <description>India is importing America's failed suburban development model while abandoning its own traditional cities -- which already embody everything the world's best urbanists now advocate.</description>
+      <guid isPermaLink="true">https://sunil-dhaka.github.io/datastories/strong-towns-india/</guid>
+      <pubDate>2026-03-05T00:00:00+05:30</pubDate>
+    </item>
+    <item>
+      <title>The Guar Story: Rajasthan's Desert Gold</title>
+      <link>https://sunil-dhaka.github.io/datastories/rajasthan-guar/</link>
+      <description>How a drought-resistant bean from the Thar Desert connects Rajasthan's farmers to America's oil rigs -- a $2.5B commodity that's cheapest where it's grown.</description>
+      <guid isPermaLink="true">https://sunil-dhaka.github.io/datastories/rajasthan-guar/</guid>
+      <pubDate>2026-02-26T00:00:00+05:30</pubDate>
+    </item>
+  </channel>
+</rss>
