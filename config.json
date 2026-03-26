@@ -4,6 +4,15 @@
   "author": "Sunil Dhaka",
   "stories": [
     {
+      "id": "india-petroleum-consumption",
+      "title": "India's Petroleum Appetite: 239 Million Tonnes and Climbing",
+      "description": "The world's third-largest oil consumer uses 1/22nd the oil per person that America does. Kerosene has collapsed 93%, India has overtaken China as the #1 source of oil demand growth, and 88% of crude is imported.",
+      "link": "india-petroleum-consumption/",
+      "screenshot": "india-petroleum-consumption/screenshot.png",
+      "date": "2026-03-26",
+      "folder": "india-petroleum-consumption"
+    },
+    {
       "id": "strong-towns-india",
       "title": "India's Urban Growth Ponzi Scheme",
       "description": "India is importing America's failed suburban development model while abandoning its own traditional cities -- which already embody everything the world's best urbanists now advocate.",
