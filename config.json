@@ -4,6 +4,15 @@
   "author": "Sunil Dhaka",
   "stories": [
     {
+      "id": "india-inflation",
+      "title": "The Rupee Tax: 64 Years of Purchasing Power Destruction",
+      "description": "Prices multiplied 90x since 1960. But inflation is radically non-uniform -- gold inflated 47x, cars only 3x, and telecom deflated to zero. The average inflation number is a fiction.",
+      "link": "india-inflation/",
+      "screenshot": "india-inflation/screenshot.png",
+      "date": "2026-03-31",
+      "folder": "india-inflation"
+    },
+    {
       "id": "india-petroleum-consumption",
       "title": "India's Petroleum Appetite: 239 Million Tonnes and Climbing",
       "description": "The world's third-largest oil consumer uses 1/22nd the oil per person that America does. Kerosene has collapsed 93%, India has overtaken China as the #1 source of oil demand growth, and 88% of crude is imported.",
