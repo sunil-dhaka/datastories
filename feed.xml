@@ -5,8 +5,15 @@
     <link>https://sunil-dhaka.github.io/datastories/</link>
     <description>Visualizations and narratives from public datasets</description>
     <language>en</language>
-    <lastBuildDate>2026-03-26T00:00:00+05:30</lastBuildDate>
+    <lastBuildDate>2026-03-31T00:00:00+05:30</lastBuildDate>
     <ns0:link href="https://sunil-dhaka.github.io/datastories/feed.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>The Rupee Tax: 64 Years of Purchasing Power Destruction</title>
+      <link>https://sunil-dhaka.github.io/datastories/india-inflation/</link>
+      <description>Prices multiplied 90x since 1960. But inflation is radically non-uniform -- gold inflated 47x, cars only 3x, and telecom deflated to zero. The average inflation number is a fiction.</description>
+      <guid isPermaLink="true">https://sunil-dhaka.github.io/datastories/india-inflation/</guid>
+      <pubDate>2026-03-31T00:00:00+05:30</pubDate>
+    </item>
     <item>
       <title>India's Petroleum Appetite: 239 Million Tonnes and Climbing</title>
       <link>https://sunil-dhaka.github.io/datastories/india-petroleum-consumption/</link>
