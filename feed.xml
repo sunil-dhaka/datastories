@@ -5,8 +5,15 @@
     <link>https://sunil-dhaka.github.io/datastories/</link>
     <description>Visualizations and narratives from public datasets</description>
     <language>en</language>
-    <lastBuildDate>2026-03-31T00:00:00+05:30</lastBuildDate>
+    <lastBuildDate>2026-04-15T00:00:00+05:30</lastBuildDate>
     <ns0:link href="https://sunil-dhaka.github.io/datastories/feed.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>Who Runs India? The Executive Government Directory</title>
+      <link>https://sunil-dhaka.github.io/datastories/india-govt-directory/</link>
+      <description>The complete directory of India's executive government -- 31 Cabinet Ministers, 41 Ministers of State, 90+ Secretaries, and 150+ Joint Secretaries across all 54 ministries. Searchable, filterable, with bios and IAS batch details.</description>
+      <guid isPermaLink="true">https://sunil-dhaka.github.io/datastories/india-govt-directory/</guid>
+      <pubDate>2026-04-15T00:00:00+05:30</pubDate>
+    </item>
     <item>
       <title>The Rupee Tax: 64 Years of Purchasing Power Destruction</title>
       <link>https://sunil-dhaka.github.io/datastories/india-inflation/</link>
