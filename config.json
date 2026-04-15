@@ -4,6 +4,15 @@
   "author": "Sunil Dhaka",
   "stories": [
     {
+      "id": "india-govt-directory",
+      "title": "Who Runs India? The Executive Government Directory",
+      "description": "The complete directory of India's executive government -- 31 Cabinet Ministers, 41 Ministers of State, 90+ Secretaries, and 150+ Joint Secretaries across all 54 ministries. Searchable, filterable, with bios and IAS batch details.",
+      "link": "india-govt-directory/",
+      "screenshot": "india-govt-directory/screenshot.png",
+      "date": "2026-04-15",
+      "folder": "india-govt-directory"
+    },
+    {
       "id": "india-inflation",
       "title": "The Rupee Tax: 64 Years of Purchasing Power Destruction",
       "description": "Prices multiplied 90x since 1960. But inflation is radically non-uniform -- gold inflated 47x, cars only 3x, and telecom deflated to zero. The average inflation number is a fiction.",

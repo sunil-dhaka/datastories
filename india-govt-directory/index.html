@@ -1,0 +1,1322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>India's Executive Government Directory -- April 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #e8e8e8;
+  --paper: #ffffff;
+  --ink: #1a1a2e;
+  --text: #2d2d3f;
+  --secondary: #5a5a72;
+  --muted: #8b8ba0;
+  --saffron: #FF9933;
+  --deep-blue: #000080;
+  --india-green: #138808;
+  --red: #CC0000;
+  --gold: #DAA520;
+  --nav-bg: #000;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Space Mono', monospace;
+  font-size: 13px;
+  line-height: 1.6;
+}
+nav {
+  position: fixed; top:0; left:0; right:0; z-index:100;
+  background: var(--nav-bg);
+  height: 52px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 24px;
+  border-bottom: 3px solid var(--saffron);
+}
+nav .logo {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  color: #fff;
+  font-size: 20px;
+}
+nav .nav-date {
+  color: #888;
+  font-size: 11px;
+}
+.ticker {
+  background: var(--ink);
+  color: var(--saffron);
+  height: 32px;
+  display: flex; align-items: center;
+  overflow: hidden;
+  margin-top: 52px;
+  font-size: 11px;
+  font-weight: 700;
+}
+.ticker-content {
+  display: flex;
+  animation: scroll 60s linear infinite;
+  white-space: nowrap;
+}
+.ticker-content span { margin-right: 48px; }
+@keyframes scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+.hero {
+  padding: 48px 0 32px;
+  text-align: center;
+}
+.hero h1 {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: 42px;
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+.hero .subtitle {
+  color: var(--secondary);
+  font-size: 13px;
+  margin-bottom: 24px;
+}
+.stats-row {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-bottom: 32px;
+}
+.stat-card {
+  background: var(--paper);
+  border: 1.5px solid #000;
+  box-shadow: 4px 4px 0px #000;
+  padding: 16px 24px;
+  text-align: center;
+  min-width: 140px;
+}
+.stat-card .num {
+  font-family: 'Instrument Serif', serif;
+  font-size: 36px;
+  color: var(--ink);
+  font-style: italic;
+}
+.stat-card .label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--secondary);
+  margin-top: 2px;
+}
+/* Org Chart */
+.org-section {
+  margin: 32px 0;
+}
+.section-title {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: 28px;
+  color: var(--ink);
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--ink);
+}
+.org-tree {
+  background: var(--paper);
+  border: 1.5px solid #000;
+  box-shadow: 4px 4px 0px #000;
+  padding: 32px;
+  overflow-x: auto;
+}
+.org-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.org-person {
+  background: var(--ink);
+  color: #fff;
+  padding: 10px 20px;
+  text-align: center;
+  min-width: 180px;
+  font-size: 12px;
+}
+.org-person.pm { background: var(--saffron); color: var(--ink); }
+.org-person.cabinet { background: var(--deep-blue); }
+.org-person.secretary { background: #333; }
+.org-person .name {
+  font-family: 'Instrument Serif', serif;
+  font-size: 16px;
+  font-style: italic;
+}
+.org-person .role { font-size: 9px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+.org-connector {
+  width: 2px; height: 20px;
+  background: var(--ink);
+}
+.org-row {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+  position: relative;
+}
+.org-row::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 10%;
+  right: 10%;
+  height: 2px;
+  background: var(--ink);
+}
+.org-branch {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Search & Filter */
+.controls {
+  margin: 24px 0;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.search-box {
+  flex: 1;
+  min-width: 280px;
+  padding: 10px 16px;
+  font-family: 'Space Mono', monospace;
+  font-size: 13px;
+  border: 1.5px solid #000;
+  background: var(--paper);
+  outline: none;
+}
+.search-box:focus { box-shadow: 4px 4px 0px var(--saffron); }
+.filter-btn {
+  padding: 8px 16px;
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  border: 1.5px solid #000;
+  background: var(--paper);
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.15s;
+}
+.filter-btn:hover, .filter-btn.active {
+  background: var(--ink);
+  color: #fff;
+  box-shadow: 2px 2px 0px var(--saffron);
+}
+
+/* Ministry Cards */
+.ministry-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  margin: 24px 0 48px;
+}
+.ministry-card {
+  background: var(--paper);
+  border: 1.5px solid #000;
+  box-shadow: 4px 4px 0px #000;
+  overflow: hidden;
+}
+.ministry-header {
+  padding: 16px 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  transition: background 0.15s;
+}
+.ministry-header:hover { background: #f8f8f8; }
+.ministry-cluster-tag {
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: #fff;
+  padding: 3px 8px;
+  background: var(--deep-blue);
+  white-space: nowrap;
+}
+.ministry-cluster-tag.finance { background: #8B4513; }
+.ministry-cluster-tag.security { background: #8B0000; }
+.ministry-cluster-tag.infra { background: #2F4F4F; }
+.ministry-cluster-tag.social { background: #4B0082; }
+.ministry-cluster-tag.agri { background: var(--india-green); }
+.ministry-cluster-tag.energy { background: #B8860B; }
+.ministry-cluster-tag.tech { background: #006400; }
+.ministry-cluster-tag.governance { background: #191970; }
+.ministry-cluster-tag.core { background: var(--saffron); color: var(--ink); }
+.ministry-name {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: 20px;
+  color: var(--ink);
+  flex: 1;
+}
+.ministry-minister {
+  font-size: 11px;
+  color: var(--secondary);
+  text-align: right;
+  min-width: 120px;
+}
+.ministry-minister strong { color: var(--ink); }
+.expand-icon {
+  font-size: 18px;
+  color: var(--muted);
+  transition: transform 0.2s;
+}
+.ministry-card.open .expand-icon { transform: rotate(45deg); }
+.ministry-body {
+  display: none;
+  border-top: 1px solid #ddd;
+  padding: 20px;
+}
+.ministry-card.open .ministry-body { display: block; }
+.dept-desc {
+  background: #fff8f0;
+  border-left: 5px solid var(--saffron);
+  padding: 12px 16px;
+  margin-bottom: 16px;
+  font-size: 12px;
+  color: var(--secondary);
+  line-height: 1.7;
+}
+.officers-section { margin-top: 16px; }
+.officer-level {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--saffron);
+  font-weight: 700;
+  margin: 16px 0 8px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid #eee;
+}
+.officer-level:first-child { margin-top: 0; }
+.officer-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 8px 0;
+  border-bottom: 1px dashed #eee;
+}
+.officer-row:last-child { border-bottom: none; }
+.officer-avatar {
+  width: 36px; height: 36px;
+  border-radius: 0;
+  background: var(--ink);
+  color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Instrument Serif', serif;
+  font-size: 16px;
+  font-style: italic;
+  flex-shrink: 0;
+}
+.officer-info { flex: 1; }
+.officer-name {
+  font-weight: 700;
+  color: var(--ink);
+  font-size: 13px;
+}
+.officer-meta {
+  font-size: 11px;
+  color: var(--secondary);
+}
+.officer-bio {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 2px;
+  font-style: italic;
+}
+.officer-area {
+  font-size: 11px;
+  color: var(--deep-blue);
+  background: #f0f0ff;
+  padding: 2px 6px;
+  display: inline-block;
+  margin-top: 2px;
+}
+
+/* Footer */
+footer {
+  background: var(--nav-bg);
+  color: #888;
+  padding: 32px 24px;
+  text-align: center;
+  font-size: 11px;
+  margin-top: 48px;
+}
+footer a { color: var(--saffron); }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero h1 { font-size: 28px; }
+  .stats-row { gap: 12px; }
+  .stat-card { min-width: 100px; padding: 12px 16px; }
+  .stat-card .num { font-size: 28px; }
+  .ministry-header { flex-wrap: wrap; }
+  .ministry-minister { text-align: left; min-width: auto; }
+  .org-tree { padding: 16px; }
+}
+
+/* Hierarchy viz */
+.hierarchy-flow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+.h-level {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+}
+.h-node {
+  padding: 8px 16px;
+  text-align: center;
+  font-size: 11px;
+  min-width: 150px;
+}
+.h-node .h-name { font-family: 'Instrument Serif', serif; font-size: 15px; font-style: italic; }
+.h-node .h-role { font-size: 9px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+.h-connector-v {
+  width: 2px; height: 16px; background: var(--ink); margin: 0 auto;
+}
+.h-connector-h {
+  height: 2px; background: var(--ink); margin: 0 auto;
+}
+.h-pm { background: var(--saffron); color: var(--ink); }
+.h-top { background: var(--ink); color: #fff; }
+.h-cabinet { background: var(--deep-blue); color: #fff; font-size: 10px; }
+.h-cabinet .h-name { font-size: 13px; }
+
+.match-highlight { background: #fff3cd; }
+
+/* Council of Ministers section */
+.com-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 10px;
+  margin: 16px 0;
+}
+.com-card {
+  background: var(--paper);
+  border: 1px solid #ccc;
+  padding: 10px 12px;
+}
+.com-card .com-name {
+  font-weight: 700;
+  font-size: 12px;
+  color: var(--ink);
+}
+.com-card .com-portfolio {
+  font-size: 10px;
+  color: var(--secondary);
+  margin-top: 2px;
+}
+.com-card .com-bio {
+  font-size: 10px;
+  color: var(--muted);
+  margin-top: 4px;
+  font-style: italic;
+}
+.com-card.cabinet-rank { border-left: 4px solid var(--saffron); }
+.com-card.mos-rank { border-left: 4px solid var(--deep-blue); }
+.com-card.mos-ic { border-left: 4px solid var(--india-green); }
+
+.section-subtitle {
+  font-family: 'Instrument Serif', serif;
+  font-size: 18px;
+  color: var(--secondary);
+  margin: 24px 0 12px;
+  font-style: italic;
+}
+.results-count {
+  font-size: 11px;
+  color: var(--muted);
+  margin: 8px 0;
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">India Executive Directory</div>
+  <div class="nav-date">as of 15 April 2026</div>
+</nav>
+
+<div class="ticker">
+  <div class="ticker-content" id="ticker">
+  </div>
+</div>
+
+<div class="container">
+  <div class="hero">
+    <h1>Who Runs India?</h1>
+    <p class="subtitle">The complete executive government directory -- Cabinet Ministers, Ministers of State, Secretaries, and Joint Secretaries across all 54 ministries</p>
+    <div class="stats-row" id="stats-row"></div>
+  </div>
+
+  <!-- High-level org chart -->
+  <div class="org-section">
+    <div class="section-title">Executive Hierarchy</div>
+    <div class="org-tree">
+      <div class="hierarchy-flow" id="org-chart"></div>
+    </div>
+  </div>
+
+  <!-- Council of Ministers -->
+  <div class="org-section">
+    <div class="section-title">Council of Ministers (72 members)</div>
+    <div class="section-subtitle">Cabinet Ministers (31)</div>
+    <div class="com-grid" id="cabinet-grid"></div>
+    <div class="section-subtitle">Ministers of State -- Independent Charge (5)</div>
+    <div class="com-grid" id="mos-ic-grid"></div>
+    <div class="section-subtitle">Ministers of State (36)</div>
+    <div class="com-grid" id="mos-grid"></div>
+  </div>
+
+  <!-- Ministry Directory -->
+  <div class="org-section">
+    <div class="section-title">Ministry & Department Directory</div>
+    <div class="controls">
+      <input type="text" class="search-box" id="search" placeholder="Search by name, ministry, department, batch, cadre...">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="core">Core</button>
+      <button class="filter-btn" data-filter="finance">Finance</button>
+      <button class="filter-btn" data-filter="security">Security</button>
+      <button class="filter-btn" data-filter="infra">Infra</button>
+      <button class="filter-btn" data-filter="social">Social</button>
+      <button class="filter-btn" data-filter="agri">Agri</button>
+      <button class="filter-btn" data-filter="energy">Energy</button>
+      <button class="filter-btn" data-filter="tech">Tech</button>
+      <button class="filter-btn" data-filter="governance">Governance</button>
+    </div>
+    <div class="results-count" id="results-count"></div>
+    <div class="ministry-grid" id="ministry-grid"></div>
+  </div>
+</div>
+
+<footer>
+  <p>Data compiled from official Government of India sources (india.gov.in, igod.gov.in, ministry websites), APAC News, Indian Bureaucracy, Indian Mandarins, The Secretariat, and PIB.</p>
+  <p style="margin-top:8px;">Officer postings change frequently. Last verified: April 2026. Some recent transfers may not be reflected.</p>
+</footer>
+
+<script>
+// ===== DATA =====
+const DATA = {
+topLeadership: [
+  {name:"Narendra Modi", role:"Prime Minister", extra:"PM since 2014"},
+  {name:"T.V. Somanathan", role:"Cabinet Secretary", extra:"IAS 1987, Tamil Nadu"},
+  {name:"Dr. P.K. Mishra", role:"Principal Secretary to PM", extra:"IAS 1972 (Retd), Gujarat"},
+  {name:"Ajit Kumar Doval", role:"National Security Advisor", extra:"IPS 1968 (Retd), KC"},
+],
+cabinetMinisters: [
+  {name:"Rajnath Singh", portfolio:"Defence", bio:"Senior BJP leader, former UP CM & Home Minister"},
+  {name:"Amit Shah", portfolio:"Home Affairs; Cooperation", bio:"Former BJP President, key strategist"},
+  {name:"Nirmala Sitharaman", portfolio:"Finance; Corporate Affairs", bio:"Economist, former Defence & Commerce Minister"},
+  {name:"S. Jaishankar", portfolio:"External Affairs", bio:"Former Foreign Secretary, career diplomat & author"},
+  {name:"Nitin Gadkari", portfolio:"Road Transport & Highways", bio:"Former BJP President, infrastructure-focused leader"},
+  {name:"J.P. Nadda", portfolio:"Health & Family Welfare; Chemicals & Fertilizers", bio:"BJP National President, former Health MoS"},
+  {name:"Shivraj Singh Chouhan", portfolio:"Agriculture & Farmers' Welfare; Rural Development", bio:"Four-time Madhya Pradesh CM"},
+  {name:"Manohar Lal Khattar", portfolio:"Housing & Urban Affairs; Power", bio:"Former Haryana CM"},
+  {name:"H.D. Kumaraswamy", portfolio:"Heavy Industries; Steel", bio:"Former Karnataka CM, JD(S) leader"},
+  {name:"Piyush Goyal", portfolio:"Commerce & Industry", bio:"Former Railways & Finance Minister"},
+  {name:"Dharmendra Pradhan", portfolio:"Education", bio:"Former Petroleum & Steel Minister"},
+  {name:"Ashwini Vaishnaw", portfolio:"Railways; I&B; Electronics & IT", bio:"IAS-turned-politician, IIT & Wharton alumnus"},
+  {name:"Jyotiraditya Scindia", portfolio:"Communications; DoNER", bio:"Former Congress leader, Gwalior royal family"},
+  {name:"Bhupender Yadav", portfolio:"Environment, Forest & Climate Change", bio:"Senior advocate, BJP General Secretary"},
+  {name:"Pralhad Joshi", portfolio:"Consumer Affairs; New & Renewable Energy", bio:"Five-term MP from Dharwad"},
+  {name:"Sarbananda Sonowal", portfolio:"Ports, Shipping & Waterways", bio:"Former Assam CM"},
+  {name:"Dr. Virendra Kumar", portfolio:"Social Justice & Empowerment", bio:"Eight-term MP from Tikamgarh"},
+  {name:"K. Rammohan Naidu", portfolio:"Civil Aviation", bio:"Youngest cabinet minister, TDP, 3-term MP"},
+  {name:"Jual Oram", portfolio:"Tribal Affairs", bio:"Former Tribal Affairs Minister, 5-term MP"},
+  {name:"Giriraj Singh", portfolio:"Textiles", bio:"Former Rural Dev & MSME Minister"},
+  {name:"Gajendra Singh Shekhawat", portfolio:"Culture; Tourism", bio:"Former Jal Shakti Minister"},
+  {name:"Annpurna Devi", portfolio:"Women & Child Development", bio:"Former MoS Education, 2-term MP"},
+  {name:"Kiren Rijiju", portfolio:"Parliamentary Affairs; Minority Affairs", bio:"Former Law & Sports Minister"},
+  {name:"Hardeep Singh Puri", portfolio:"Petroleum & Natural Gas", bio:"Former Foreign Secretary, diplomat"},
+  {name:"Dr. Mansukh Mandaviya", portfolio:"Labour & Employment; Youth Affairs & Sports", bio:"Former Health Minister, Gujarat Rajya Sabha MP"},
+  {name:"G. Kishan Reddy", portfolio:"Coal; Mines", bio:"Former Tourism & Culture Minister"},
+  {name:"Chirag Paswan", portfolio:"Food Processing Industries", bio:"LJP(RV) President, son of Ram Vilas Paswan"},
+  {name:"C.R. Patil", portfolio:"Jal Shakti", bio:"BJP Gujarat & National President"},
+  {name:"Jitan Ram Manjhi", portfolio:"MSME", bio:"Former Bihar CM, HAM(S) President"},
+  {name:"Rajiv Ranjan Singh", portfolio:"Panchayati Raj; Fisheries/AH&D", bio:"JD(U) leader, 'Lalan Singh'"},
+],
+mosIC: [
+  {name:"Rao Inderjit Singh", portfolio:"Statistics & Programme Implementation; Planning", bio:"6-term MP from Gurgaon, former INC leader, CWG bronze medalist in shooting"},
+  {name:"Dr. Jitendra Singh", portfolio:"Science & Tech; Earth Sciences; PMO; Atomic Energy; Space", bio:"Physician & endocrinologist, MD from AIIMS, 3-term MP from Udhampur"},
+  {name:"Arjun Ram Meghwal", portfolio:"Law & Justice; Parliamentary Affairs", bio:"Former IAS officer, 4-term MP, Best Parliamentarian 2013, Sansad Ratna x3"},
+  {name:"Prataprao Jadhav", portfolio:"AYUSH; Health & Family Welfare", bio:"Shiv Sena (Shinde), 4-term MP from Buldhana, Maharashtra"},
+  {name:"Jayant Chaudhary", portfolio:"Skill Development & Entrepreneurship; Education", bio:"RLD President, grandson of PM Charan Singh, MSc from LSE"},
+],
+mos: [
+  {name:"Jitin Prasada", portfolio:"Commerce & Industry; Electronics & IT", bio:"Former Congress leader, ex-MoS HRD & Petroleum"},
+  {name:"Shripad Yesso Naik", portfolio:"Power; New & Renewable Energy", bio:"6-consecutive-term MP from North Goa"},
+  {name:"Pankaj Chaudhary", portfolio:"Finance", bio:"7-term MP from Maharajganj, BJP UP State President"},
+  {name:"Krishan Pal Gurjar", portfolio:"Cooperation", bio:"3-term MP from Faridabad, former Haryana Transport Minister"},
+  {name:"Ramdas Athawale", portfolio:"Social Justice & Empowerment", bio:"RPI(A) President, Dalit rights advocate"},
+  {name:"Ram Nath Thakur", portfolio:"Agriculture & Farmers Welfare", bio:"JD(U), son of former Bihar CM Karpoori Thakur (Bharat Ratna)"},
+  {name:"Nityanand Rai", portfolio:"Home Affairs", bio:"4-term Bihar MLA, MP from Ujiarpur, MoS Home since 2019"},
+  {name:"Anupriya Patel", portfolio:"Health & FW; Chemicals & Fertilizers", bio:"Apna Dal(S), MBA, 2-term MP from Mirzapur"},
+  {name:"V. Somanna", portfolio:"Jal Shakti; Railways", bio:"Former Karnataka Housing/Infra Minister"},
+  {name:"Chandra Sekhar Pemmasani", portfolio:"Rural Development; Communications", bio:"TDP, founder of UWorld, wealthiest MP (Rs 5,705 cr)"},
+  {name:"S.P. Singh Baghel", portfolio:"Fisheries/AH&D; Panchayati Raj", bio:"Doctoral degree, former SP MP turned BJP"},
+  {name:"Shobha Karandlaje", portfolio:"MSME; Labour & Employment", bio:"MSW, former Karnataka MLA, BJP Karnataka VP"},
+  {name:"Kirti Vardhan Singh", portfolio:"Environment; External Affairs", bio:"MSc Geology, 5-term MP from Gonda"},
+  {name:"B.L. Verma", portfolio:"Consumer Affairs; Social Justice", bio:"OBC Lodhi leader, RS MP from UP"},
+  {name:"Shantanu Thakur", portfolio:"Ports, Shipping & Waterways", bio:"Matua community leader, MP from Bongaon (SC)"},
+  {name:"Suresh Gopi", portfolio:"Petroleum & Natural Gas; Tourism", bio:"Malayalam film star, National Film Award, BJP's first Kerala MP"},
+  {name:"Dr. L. Murugan", portfolio:"I&B; Parliamentary Affairs", bio:"PhD Law, first Arunthathiyar Union Minister"},
+  {name:"Ajay Tamta", portfolio:"Road Transport & Highways", bio:"3-term MP from Almora (SC)"},
+  {name:"Bandi Sanjay Kumar", portfolio:"Home Affairs", bio:"RSS volunteer since age 12, former BJP Telangana President"},
+  {name:"Kamlesh Paswan", portfolio:"Rural Development", bio:"4-term MP from Bansgaon (SC)"},
+  {name:"Bhagirath Choudhary", portfolio:"Agriculture & Farmers Welfare", bio:"BJP Kisan Morcha President, 2-term MP from Ajmer"},
+  {name:"Satish Chandra Dubey", portfolio:"Coal; Mines", bio:"2-term RS MP from Bihar"},
+  {name:"Sanjay Seth", portfolio:"Defence", bio:"2-term MP from Ranchi"},
+  {name:"Ravneet Singh Bittu", portfolio:"Food Processing; Railways", bio:"Grandson of Punjab CM Beant Singh, former Congress MP turned BJP"},
+  {name:"Durgadas Uikey", portfolio:"Tribal Affairs", bio:"Former teacher, 2-term MP from Betul (ST)"},
+  {name:"Raksha Khadse", portfolio:"Youth Affairs & Sports", bio:"3-term MP from Raver, started as village sarpanch"},
+  {name:"Sukanta Majumdar", portfolio:"Education; DoNER", bio:"PhD Botany, professor, BJP West Bengal President"},
+  {name:"Savitri Thakur", portfolio:"Women & Child Development", bio:"Tribal leader, 2-term MP from Dhar (ST)"},
+  {name:"Tokhan Sahu", portfolio:"Housing & Urban Affairs", bio:"First-time MP from Bilaspur, Chhattisgarh"},
+  {name:"Raj Bhushan Choudhary", portfolio:"Jal Shakti", bio:"Doctor, MD, first-time MP from Muzaffarpur"},
+  {name:"Bhupathi Raju Srinivasa Varma", portfolio:"Heavy Industries; Steel", bio:"MA Politics, BJP AP Secretary, MP from Narsapuram"},
+  {name:"Harsh Malhotra", portfolio:"Corporate Affairs; Road Transport", bio:"Former Mayor of East Delhi, first-time MP"},
+  {name:"Nimuben Bambhaniya", portfolio:"Consumer Affairs", bio:"Former teacher & Bhavnagar Mayor, won by 4.55L margin"},
+  {name:"Murlidhar Mohol", portfolio:"Cooperation; Civil Aviation", bio:"Former wrestler & Pune Mayor, RSS member since age 12"},
+  {name:"George Kurian", portfolio:"Minority Affairs; Fisheries/AH&D", bio:"SC lawyer, Kerala Christian community leader, BJP minority outreach"},
+  {name:"Pabitra Margherita", portfolio:"External Affairs; Textiles", bio:"Diploma in Textile Tech, actor/producer, BJP Assam spokesperson"},
+],
+ministries: [
+  // Core Executive
+  {name:"Prime Minister's Office", cluster:"core", desc:"Provides secretarial assistance to the PM. Coordinates with all ministries, handles PM's correspondence, interfaces with Cabinet Secretariat, and oversees key government programmes. Houses the Principal Secretary, NSA, and senior advisors.",
+   minister:"Narendra Modi", mos:"Dr. Jitendra Singh",
+   officers:[
+    {level:"Principal Secretary",name:"Dr. P.K. Mishra",meta:"IAS 1972 (Retd), Gujarat",bio:"PhD Economics (Sussex), MA Economics (DSE). Former Agriculture Secretary, PS to CM Modi in Gujarat."},
+    {level:"Principal Secretary",name:"Shaktikanta Das",meta:"IAS 1980 (Retd), Tamil Nadu",bio:"Former RBI Governor (2018-2024), Revenue Secretary, Economic Affairs Secretary."},
+    {level:"NSA",name:"Ajit Kumar Doval, KC",meta:"IPS 1968 (Retd), Kerala",bio:"India's longest-serving NSA. Former IB Director. Kirti Chakra awardee."},
+    {level:"Additional Secretary",name:"Ashish Vachhani",meta:"IAS",bio:""},
+    {level:"Additional Secretary",name:"M.S. Srikar",meta:"IAS",bio:""},
+    {level:"Joint Secretary",name:"C. Sridhar",meta:"IAS",bio:""},
+    {level:"Joint Secretary",name:"Saurabh Shukla",meta:"IA&AS 2005",bio:"Tenure extended to Oct 2026"},
+    {level:"Private Secretary to PM",name:"Dr. Hardik Shah",meta:"IAS 2010",bio:"Appointed April 2026"},
+   ]},
+  {name:"Cabinet Secretariat", cluster:"core", desc:"Functions directly under the PM, headed by the Cabinet Secretary (senior-most civil servant). Ensures smooth transaction of business in Cabinet meetings, coordinates inter-ministerial matters, manages crises. Houses Civil, Military, and Intelligence wings (including RAW).",
+   minister:"Narendra Modi", mos:"",
+   officers:[
+    {level:"Cabinet Secretary",name:"Dr. T.V. Somanathan",meta:"IAS 1987, Tamil Nadu",bio:"PhD Economics; CA, CMA & CS. UPSC AIR-2. Former Finance Secretary, World Bank Director."},
+    {level:"Secretary (Security)",name:"Parag Jain",meta:"IPS 1989",bio:"Also heads RAW. Holds additional charge as Secretary (S)/SPG."},
+    {level:"Secretary (Coordination)",name:"Manoj Govil",meta:"IAS 1991",bio:""},
+   ]},
+  {name:"NITI Aayog", cluster:"core", desc:"India's premier policy think tank (replaced Planning Commission). Provides strategic advice, fosters cooperative federalism, monitors SDGs. Runs Aspirational Districts/Blocks Programme, designs long-term policy frameworks, coordinated G20 research.",
+   minister:"Narendra Modi (Chair)", mos:"",
+   officers:[
+    {level:"Vice Chairman",name:"Suman K. Bery",meta:"",bio:"Economist, former DG of NCAER."},
+    {level:"CEO",name:"Nidhi Chhibber (addl charge)",meta:"IAS 1994, Chhattisgarh",bio:"Former CBSE Chairperson, DG DMEO. Replaced BVR Subrahmanyam in Feb 2026."},
+    {level:"Joint Secretary",name:"Anna Roy",meta:"",bio:"Data Management, Urbanisation, Research"},
+    {level:"Joint Secretary",name:"Sanjeet Singh",meta:"",bio:"Economics & Finance II, G20, Trade"},
+    {level:"Joint Secretary",name:"Yugal Kishore Joshi",meta:"",bio:"Water Resources, IT, Tourism"},
+   ]},
+
+  // Finance & Economy
+  {name:"Finance -- Economic Affairs", cluster:"finance", desc:"Formulates macroeconomic and fiscal policy, prepares the Union Budget, handles foreign investment regulation, capital markets (SEBI liaison), external debt management, multilateral relations (World Bank, ADB, IMF), and currency/coinage matters.",
+   minister:"Nirmala Sitharaman", mos:"Pankaj Chaudhary",
+   officers:[
+    {level:"Secretary",name:"Anuradha Thakur",meta:"IAS 1994, Himachal Pradesh",bio:"First woman DEA Secretary. On RBI & SEBI boards. Succeeded Ajay Seth."},
+    {level:"Chief Economic Adviser",name:"V. Anantha Nageswaran",meta:"",bio:""},
+    {level:"Joint Secretary",name:"Baldeo Purushartha",meta:"",bio:"ADB & Japan, Bilateral Cooperation"},
+    {level:"Joint Secretary",name:"Juhi Mukherjee",meta:"",bio:"Fund-Bank, Admin & Coordination"},
+    {level:"Joint Secretary",name:"Amit Singla",meta:"",bio:"Investment, Coin & Currency"},
+    {level:"Joint Secretary",name:"Vyasan R",meta:"",bio:"Budget Division"},
+   ]},
+  {name:"Finance -- Revenue", cluster:"finance", desc:"Controls all direct and indirect Union taxes through CBDT and CBIC. Handles tax policy formulation, prevention of tax evasion and smuggling, narcotics control enforcement, and the Financial Intelligence Unit (FIU-India).",
+   minister:"Nirmala Sitharaman", mos:"Pankaj Chaudhary",
+   officers:[
+    {level:"Secretary",name:"Arvind Shrivastava",meta:"IAS 1994, Karnataka",bio:"Previously served in PMO as JS and Additional Secretary."},
+    {level:"CBDT Chairman",name:"Ravi Agrawal",meta:"",bio:""},
+    {level:"CBIC Chairman",name:"Vivek Chaturvedi",meta:"",bio:""},
+    {level:"Joint Secretary",name:"Shankar Lal Kumawat",meta:"IAS 2010, Tamil Nadu",bio:"Tenure up to March 2030"},
+    {level:"Joint Secretary",name:"Anupam Prakash",meta:"",bio:"PITNDPS (Narcotics)"},
+   ]},
+  {name:"Finance -- Expenditure", cluster:"finance", desc:"Oversees expenditure management of central government including pay/pension policy, Finance Commission implementation, Pay Commission recommendations, financial rules, and public procurement policy.",
+   minister:"Nirmala Sitharaman", mos:"Pankaj Chaudhary",
+   officers:[
+    {level:"Secretary",name:"V. Vualnam",meta:"IAS 1992, Manipur",bio:"First ST officer from NE India in this post. Former Aviation Secretary. BCom, MA Public Policy."},
+    {level:"Joint Secretary",name:"P.K. Singh",meta:"",bio:""},
+    {level:"Joint Secretary",name:"Dr. Ekroop Kaur",meta:"IAS 2001",bio:""},
+   ]},
+  {name:"Finance -- Financial Services", cluster:"finance", desc:"Oversees public sector banks, financial institutions, insurance companies, and pension reforms. Manages banking policy, financial inclusion (Jan Dhan, Mudra), LIC/GIC oversight, credit flow to priority sectors.",
+   minister:"Nirmala Sitharaman", mos:"Pankaj Chaudhary",
+   officers:[
+    {level:"Secretary",name:"M. Nagaraju",meta:"IAS 1993, Tripura",bio:"Due to superannuate May 2026."},
+    {level:"Special Secretary",name:"Sanjay Lohiya",meta:"IAS 1994, Assam-Meghalaya",bio:"Slated to succeed as Secretary FS."},
+    {level:"Joint Secretary",name:"Shalini Pandit",meta:"IAS",bio:"Part-time IRDAI member, Govt nominee on LIC board"},
+   ]},
+  {name:"Finance -- DIPAM", cluster:"finance", desc:"Handles strategic disinvestment of government equity in CPSEs, management of government investments, capital restructuring, and public asset monetization. Administers the National Investment Fund.",
+   minister:"Nirmala Sitharaman", mos:"Pankaj Chaudhary",
+   officers:[
+    {level:"Secretary",name:"Dr. Arunish Chawla",meta:"IAS 1992, Bihar",bio:"Also Finance Secretary. PhD Economics (LSE). Former IMF stint."},
+    {level:"Joint Secretary",name:"Navin Agarwal",meta:"",bio:""},
+    {level:"Joint Secretary",name:"Ashish Kumar",meta:"",bio:""},
+   ]},
+  {name:"Commerce -- Dept of Commerce", cluster:"finance", desc:"Formulates foreign trade policy, manages bilateral & multilateral trade negotiations (WTO, FTAs), oversees export promotion (DGFT), administers SEZs, and handles anti-dumping/trade remedies.",
+   minister:"Piyush Goyal", mos:"Jitin Prasada",
+   officers:[
+    {level:"Secretary",name:"Rajesh Agrawal",meta:"IAS 1994, Manipur",bio:"Leading US-India trade talks. Took charge Oct 2025."},
+    {level:"Joint Secretary",name:"Amit Verma",meta:"IFoS 2005, Uttarakhand",bio:"Appointed Jan 2026"},
+    {level:"Joint Secretary",name:"Ujjwal Kumar Ghosh",meta:"IAS 2008, Karnataka",bio:""},
+    {level:"Joint Secretary",name:"Kapil Chaudhary",meta:"IRS-C&IT 2001",bio:""},
+    {level:"Joint Secretary",name:"Petal Dhillon",meta:"IRTS 2002",bio:""},
+   ]},
+  {name:"Commerce -- DPIIT", cluster:"finance", desc:"Formulates industrial policy, FDI policy, IPR policy, and startup ecosystem (Startup India). Oversees ease of doing business reforms, industrial corridors, semiconductor policy, and the National Logistics Policy.",
+   minister:"Piyush Goyal", mos:"Jitin Prasada",
+   officers:[
+    {level:"Secretary",name:"Amardeep Singh Bhatia",meta:"IAS 1993, Nagaland",bio:"Took charge Aug 2024. Previously AS, Dept of Commerce."},
+    {level:"Joint Secretary",name:"Pankaj Kumar",meta:"ITS 1991",bio:"Logistics. Tenure until Oct 2028."},
+    {level:"Joint Secretary",name:"Gurneet Tej",meta:"IAS 2006, Karnataka",bio:"GST Subsidy, Industrial Corridors"},
+    {level:"Joint Secretary",name:"Dr. Kajal",meta:"IAS 2008, UP",bio:"Appointed April 2026"},
+   ]},
+  {name:"Corporate Affairs", cluster:"finance", desc:"Administers Companies Act 2013, LLP Act, and Insolvency & Bankruptcy Code 2016. Oversees corporate governance, MCA21 portal, SFIO, NFRA, Competition Commission, and NCLTs.",
+   minister:"Nirmala Sitharaman", mos:"Harsh Malhotra",
+   officers:[
+    {level:"Secretary",name:"Deepti Gaur Mukerjee",meta:"IAS 1993, Madhya Pradesh",bio:"Former CEO, National Health Authority. Leading Digital Competition Bill & IBC 2.0."},
+    {level:"Joint Secretary",name:"Inder Deep Singh Dhariwal",meta:"IA&AS 1992",bio:"NFRA, CSR, Admin, Parliament, RTI"},
+    {level:"Joint Secretary",name:"Balamurugan D",meta:"IAS 2005, Bihar",bio:""},
+    {level:"Joint Secretary",name:"Rahul Jain",meta:"IAS 2005, MP",bio:""},
+   ]},
+  {name:"MSME", cluster:"finance", desc:"Formulates policies for micro, small & medium enterprises. Implements PM Vishwakarma, PMEGP, SFURTI, ASPIRE, and the CHAMPIONS portal. Oversees KVIC, Coir Board, NSIC.",
+   minister:"Jitan Ram Manjhi", mos:"Shobha Karandlaje",
+   officers:[
+    {level:"Secretary",name:"S.C.L. Das",meta:"IAS 1992, AGMUT",bio:"Awarded for PM Vishwakarma implementation on Civil Services Day 2025."},
+    {level:"Additional Secretary & DC",name:"Dr. Rajneesh",meta:"",bio:"Development Commissioner for MSMEs"},
+    {level:"Joint Secretary",name:"Vipul Goel",meta:"",bio:"ARI Division"},
+    {level:"Joint Secretary",name:"Mercy Epao",meta:"",bio:"SME Division"},
+   ]},
+  {name:"Cooperation", cluster:"finance", desc:"Created in 2021 to strengthen the cooperative movement under 'Sahakar se Samriddhi.' Handles cooperative policy reform, PACS digitization, multi-state cooperative regulation, coordination with NCDC, NAFED, IFFCO, AMUL.",
+   minister:"Amit Shah", mos:"Krishan Pal Gurjar; Murlidhar Mohol",
+   officers:[
+    {level:"Secretary",name:"Dr. Ashish Kumar Bhutani",meta:"IAS 1992, Assam-Meghalaya",bio:"Drafted the PMFBY scheme."},
+    {level:"Additional Secretary",name:"Pankaj Kumar Bansal",meta:"IAS 1997, Tamil Nadu",bio:"Elevated from JS"},
+    {level:"Joint Secretary",name:"Raman Kumar",meta:"IAS 2009, Bihar",bio:"5-year tenure from May 2025"},
+   ]},
+
+  // Security & Foreign Affairs
+  {name:"Home Affairs", cluster:"security", desc:"Maintains internal security, law & order, border management, UT administration, citizenship/immigration, disaster management. Controls CRPF, BSF, CISF, SSB, ITBP, NSG, NIA. Cadre-controlling authority for IPS. Annual budget ~Rs 2.55 lakh crore.",
+   minister:"Amit Shah", mos:"Nityanand Rai; Bandi Sanjay Kumar",
+   officers:[
+    {level:"Secretary",name:"Govind Mohan",meta:"IAS 1989, Sikkim",bio:"BTech IIT BHU, MBA IIM Ahmedabad. Tenure extended to Aug 2026."},
+    {level:"Special Secretary (IS)",name:"Anand Swaroop",meta:"IPS 1992, UP",bio:"Appointed Jan 2026"},
+    {level:"Joint Secretary",name:"Rajeev Kumar",meta:"IOFS 2000",bio:"Coordination; addl charge Admin & Parliament"},
+    {level:"Joint Secretary",name:"Pausumi Basu",meta:"IAS 2007, Telangana",bio:"Border Management-II"},
+    {level:"Joint Secretary",name:"Mahatme Sandeep Namdeo",meta:"IAS 2010, Tripura",bio:""},
+    {level:"Joint Secretary",name:"Rakesh Rathi",meta:"IPS 2002, Bihar",bio:""},
+   ]},
+  {name:"Defence -- Dept of Defence", cluster:"security", desc:"Handles defence policy, budget, international defence cooperation, acquisitions, cantonments, Coast Guard, BRO. Coordinates between armed forces and civilian government.",
+   minister:"Rajnath Singh", mos:"Sanjay Seth",
+   officers:[
+    {level:"Secretary",name:"Rajesh Kumar Singh",meta:"IAS 1989, Kerala",bio:"Tenure extended to Oct 2026. Former Secretary DPIIT."},
+    {level:"Joint Secretary",name:"Satyajit Mohanty",meta:"IRS 1999",bio:"Defence Policy, Armed Forces Wing, CSD"},
+    {level:"Joint Secretary",name:"Dharmendra Kumar Singh",meta:"IA&AS 2000",bio:"Acquisition Manager (Air)"},
+    {level:"Joint Secretary",name:"Amit Shivkumar Telang",meta:"IFS 2005",bio:"International Cooperation"},
+    {level:"Joint Secretary",name:"Dinesh Kumar",meta:"IAS 2004, Nagaland",bio:"Maritime & Land Systems, CVO"},
+   ]},
+  {name:"Defence -- Defence Production", cluster:"security", desc:"Develops indigenous defence production, manages PSUs (HAL, BEL, BDL, MDL, etc.), promotes private sector participation under Make in India, and oversees the defence industrial base.",
+   minister:"Rajnath Singh", mos:"Sanjay Seth",
+   officers:[
+    {level:"Secretary",name:"Sanjeev Kumar",meta:"IAS 1993, Maharashtra",bio:""},
+    {level:"Joint Secretary",name:"Dr. Garima Bhagat",meta:"",bio:"Land Systems"},
+    {level:"Joint Secretary",name:"Manisha Chandra",meta:"IAS",bio:"Aerospace & DOMW"},
+    {level:"Joint Secretary",name:"Amit Satija",meta:"IAS",bio:"DIP"},
+   ]},
+  {name:"Defence -- Military Affairs (DMA)", cluster:"security", desc:"Created 2020 for tri-service integration. Handles jointness in operations, training, logistics, procurements. Headed by CDS as ex-officio Secretary. Oversees Integrated Defence Staff and Territorial Army.",
+   minister:"Rajnath Singh", mos:"Sanjay Seth",
+   officers:[
+    {level:"CDS & Secretary",name:"Gen. Anil Chauhan",meta:"PVSM, UYSM, AVSM",bio:"Tenure extended to May 2026. Former GOC-in-C Northern Command."},
+   ]},
+  {name:"External Affairs", cluster:"security", desc:"Manages India's foreign policy, diplomatic relations (200+ missions worldwide), trade diplomacy, consular services, passports, counter-terrorism diplomacy, and diaspora engagement. Cadre-controlling authority for IFS.",
+   minister:"S. Jaishankar", mos:"Kirti Vardhan Singh; Pabitra Margherita",
+   officers:[
+    {level:"Foreign Secretary",name:"Vikram Misri",meta:"IFS 1989",bio:"Kashmiri Pandit. MBA XLRI. Former Ambassador to China, Deputy NSA. Fluent in French."},
+    {level:"Secretary (West)",name:"Sibi George",meta:"IFS 1993",bio:""},
+    {level:"Secretary (South)",name:"Dr. Neena Malhotra",meta:"IFS 1992",bio:""},
+    {level:"Secretary (Economic Relations)",name:"Sudhakar Dalela",meta:"IFS 1993",bio:""},
+    {level:"Secretary (CPV & OIA)",name:"Sripriya Ranganathan",meta:"IFS 1994",bio:""},
+    {level:"Spokesperson",name:"Randhir Jaiswal",meta:"IFS 1998",bio:"Additional Secretary rank"},
+   ]},
+  {name:"Law & Justice", cluster:"security", desc:"Three departments: Legal Affairs (advises govt, manages law officers including AG & SG), Legislative (drafts legislation, publishes Gazette), and Justice (judicial appointments, e-Courts, NALSA, Tele-Law).",
+   minister:"(MoS IC) Arjun Ram Meghwal", mos:"",
+   officers:[
+    {level:"Secretary (Legislative & Legal Affairs)",name:"Dr. Rajiv Mani",meta:"ILS",bio:"Tenure extended to Jul 2028. Holds both departments."},
+    {level:"Secretary (Justice)",name:"Niraj Verma",meta:"IAS 1994, Assam-Meghalaya",bio:"Took over Aug 2025."},
+   ]},
+
+  // Infrastructure
+  {name:"Railways", cluster:"infra", desc:"Oversees Indian Railways -- world's 4th largest rail network (68,000+ km), carrying ~8B passengers and 1.2B tonnes of freight annually. Railway Board manages operations, infrastructure, rolling stock, Vande Bharat, Dedicated Freight Corridors.",
+   minister:"Ashwini Vaishnaw", mos:"V. Somanna; Ravneet Singh Bittu",
+   officers:[
+    {level:"Chairman & CEO",name:"Satish Kumar",meta:"IRSME 1986",bio:"First Dalit Railway Board Chairman. BTech Mech (MNIT Jaipur). Invented Fog Safe Device."},
+    {level:"Member (Infrastructure)",name:"Vivek Kumar Gupta",meta:"IRSE 1988",bio:"Former MD, NHSRCL (Bullet Train), GM Western Railway"},
+    {level:"Member (Operations & BD)",name:"Hari Shankar Verma",meta:"IRTS 1987",bio:"Former DG Safety. Assumed charge Feb 2026."},
+    {level:"Member (Traction & RS)",name:"Braj Mohan Agrawal",meta:"IRSME 1986",bio:"IIT Roorkee & IIM Bangalore alumnus."},
+    {level:"Member (Finance)",name:"Aparna Garg",meta:"IRAS 1987",bio:"Appointed Dec 2025. Former DG IRIFM."},
+   ]},
+  {name:"Road Transport & Highways", cluster:"infra", desc:"Develops and maintains National Highways, formulates road transport policies, vehicle safety standards, road safety regulations. Oversees NHAI, implements Bharatmala Pariyojana. Regulates motor vehicles, emission norms.",
+   minister:"Nitin Gadkari", mos:"Ajay Tamta; Harsh Malhotra",
+   officers:[
+    {level:"Secretary",name:"V. Umashankar",meta:"IAS 1993, Haryana",bio:"Previously Principal Secretary to Haryana CM."},
+    {level:"Additional Secretary",name:"Amit Kumar Ghosh",meta:"IAS 1994, UP",bio:"Elevated from JS via in-situ upgradation"},
+   ]},
+  {name:"Civil Aviation", cluster:"infra", desc:"Formulates policy for civil aviation. Oversees airport infrastructure, airline regulation, air safety, bilateral air service agreements. Supervises DGCA, AAI, BCAS, AERA. Drives UDAN regional connectivity and airport privatization.",
+   minister:"K. Rammohan Naidu", mos:"Murlidhar Mohol",
+   officers:[
+    {level:"Secretary",name:"Samir Kumar Sinha",meta:"IAS 1994, AGMUT",bio:"Former AS & DG Acquisition, Dept of Defence."},
+    {level:"Joint Secretary",name:"Priyanka Das",meta:"IAS 2009, MP",bio:"Appointed April 2026. Tenure until March 2030."},
+   ]},
+  {name:"Ports, Shipping & Waterways", cluster:"infra", desc:"Handles policy for India's ports (12 major, 200+ minor), merchant shipping, shipbuilding, inland water transport, lighthouses. Drives Sagarmala Programme. Oversees SCI, Cochin Shipyard, IWAI.",
+   minister:"Sarbananda Sonowal", mos:"Shantanu Thakur",
+   officers:[
+    {level:"Secretary",name:"Vijay Kumar",meta:"IAS 1992, AGMUT",bio:"Previously Chairman, IWAI."},
+    {level:"Joint Secretary",name:"Sandeep Gupta",meta:"",bio:"PHRD, General, Establishment"},
+    {level:"Joint Secretary",name:"Venkatesapathy S.",meta:"",bio:"Port, IT & E-Governance"},
+   ]},
+  {name:"Housing & Urban Affairs", cluster:"infra", desc:"Apex body for urban planning, housing, urban development. Implements PMAY-Urban, AMRUT, Smart Cities Mission, Swachh Bharat (Urban), DAY-NULM. Handles metro rail policy, CPWD, urban land policy, NCR planning.",
+   minister:"Manohar Lal Khattar", mos:"Tokhan Sahu",
+   officers:[
+    {level:"Secretary",name:"K. Srinivas",meta:"IAS 1998",bio:"Former Director LBSNAA, EO in DoPT."},
+    {level:"Joint Secretary",name:"Kuldip Narayan",meta:"IAS 2005, Bihar",bio:"Mission Director PMAY(U), addl charge MD NCRTC"},
+    {level:"Joint Secretary",name:"Roopa Mishra",meta:"IAS 2004, Odisha",bio:"Urban development, land/building management"},
+    {level:"Joint Secretary",name:"Pradeep Kumar Jha",meta:"IAS 2006, Manipur",bio:""},
+   ]},
+  {name:"Jal Shakti -- Water Resources", cluster:"infra", desc:"Handles water resources planning, inter-state rivers, flood management, dam safety, groundwater regulation, Namami Gange (Ganga rejuvenation). Oversees CWC, CGWB, NWDA, NMCG, river interlinking.",
+   minister:"C.R. Patil", mos:"V. Somanna; Raj Bhushan Choudhary",
+   officers:[
+    {level:"Secretary",name:"V.L. Kantha Rao",meta:"IAS 1992, MP",bio:"Former Secretary, Mines."},
+    {level:"Joint Secretary",name:"Pradeep Kumar Agrawal",meta:"IAS 2006, Punjab",bio:"River Development & Public Policy"},
+   ]},
+  {name:"Jal Shakti -- Drinking Water & Sanitation", cluster:"infra", desc:"Implements Jal Jeevan Mission (JJM) for household tap connections to every rural home. Drives Swachh Bharat Mission (Gramin). Works on drinking water quality, source protection, community water supply.",
+   minister:"C.R. Patil", mos:"V. Somanna; Raj Bhushan Choudhary",
+   officers:[
+    {level:"Secretary",name:"Ashok Kumar Meena",meta:"IAS 1993, Odisha",bio:"BTech CS (IIT Kanpur). Also holds addl charge as Secretary, Environment (Apr 2026)."},
+    {level:"Mission Director JJM",name:"Kamal Kishore Soan",meta:"IAS 1998, Jharkhand",bio:"Additional Secretary rank. Appointed Jan 2025."},
+    {level:"Joint Secretary",name:"Swati Meena Naik",meta:"IAS 2007, MP",bio:"JJM/NJJM implementation"},
+   ]},
+
+  // Social & Education
+  {name:"Education -- School Education", cluster:"social", desc:"Oversees elementary and secondary education policy, Samagra Shiksha Abhiyan, PM-SHRI Schools, PM-POSHAN (mid-day meals), teacher training, adult education, literacy programmes. Implements NEP at school level.",
+   minister:"Dharmendra Pradhan", mos:"Jayant Chaudhary; Sukanta Majumdar",
+   officers:[
+    {level:"Secretary",name:"Sanjay Kumar",meta:"IAS 1990, Bihar",bio:"Also held additional charge of DoPT briefly in Jan 2026."},
+    {level:"Joint Secretary",name:"Amarpreet Duggal",meta:"",bio:"Coordination & Media Bureau"},
+    {level:"Joint Secretary",name:"Prachi Pandey",meta:"IAS 2001",bio:"Institutions & Training Bureau"},
+    {level:"Joint Secretary",name:"Sanjog Kapoor",meta:"",bio:"JS & Financial Advisor"},
+   ]},
+  {name:"Education -- Higher Education", cluster:"social", desc:"Policy for IITs, IIMs, NITs, central universities, UGC. Manages regulatory frameworks, scholarships, research funding, international academic cooperation. Oversees NEP in higher education.",
+   minister:"Dharmendra Pradhan", mos:"Jayant Chaudhary; Sukanta Majumdar",
+   officers:[
+    {level:"Secretary",name:"Vineet Joshi",meta:"IAS 1992, Manipur",bio:"Former Chief Secretary of Manipur. Also Chairman, UGC."},
+    {level:"Joint Secretary",name:"Armstrong Pame",meta:"IAS 2009, Manipur",bio:"Tenure until April 2027. Known as the 'miracle man' who built a road connecting Manipur villages."},
+    {level:"Joint Secretary",name:"Govind Jaiswal",meta:"IAS 2007, AGMUT",bio:""},
+   ]},
+  {name:"Health & Family Welfare", cluster:"social", desc:"Responsible for public health including disease control, immunization, maternal/child health, AIIMS/medical colleges, drug regulation (CDSCO), Ayushman Bharat, National Health Mission, and pandemic preparedness.",
+   minister:"J.P. Nadda", mos:"Prataprao Jadhav; Anupriya Patel",
+   officers:[
+    {level:"Secretary",name:"Punya Salila Srivastava",meta:"IAS 1993, AGMUT",bio:"MSc Physics (St. Stephen's), MPM (Univ of Maryland). Former AS in PMO. Tenure till Sep 2030."},
+    {level:"Joint Secretary",name:"Muthukumar Alagumuthu",meta:"IAS 2009, Jharkhand",bio:"Appointed April 2026"},
+    {level:"Joint Secretary",name:"Prabhakar",meta:"IAS 2007, Sikkim",bio:"Appointed April 2026"},
+    {level:"Joint Secretary",name:"Sibin C.",meta:"IAS 2005, Punjab",bio:""},
+    {level:"Joint Secretary",name:"Harsh Mangla",meta:"IAS 2008, Jharkhand",bio:""},
+   ]},
+  {name:"AYUSH", cluster:"social", desc:"Promotes traditional Indian medicine -- Ayurveda, Yoga & Naturopathy, Unani, Siddha, Homoeopathy. Manages quality control, research, National AYUSH Mission, International Day of Yoga, and integration of traditional medicine into public health.",
+   minister:"(MoS IC) Prataprao Jadhav", mos:"",
+   officers:[
+    {level:"Secretary",name:"Vaidya Rajesh Kotecha",meta:"Contract basis, Padma Shri",bio:"Former VC, Gujarat Ayurveda University. Serving since 2017, 4th extension till June 2026."},
+    {level:"Joint Secretary",name:"Monalisa Dash",meta:"IFoS 2003, Sikkim",bio:"Tenure until Oct 2026"},
+   ]},
+  {name:"Social Justice & Empowerment", cluster:"social", desc:"Works for welfare of Scheduled Castes, OBCs, senior citizens, substance abuse victims. Implements PM-DAKSH (skill development), PM-AJAY (SC infrastructure), Post-Matric Scholarships. Administers Prevention of Atrocities Act.",
+   minister:"Dr. Virendra Kumar", mos:"Ramdas Athawale; B.L. Verma",
+   officers:[
+    {level:"Secretary",name:"Sudhansh Pant",meta:"IAS 1991, Rajasthan",bio:"Former Chief Secretary of Rajasthan. Assumed charge Dec 2025."},
+    {level:"Joint Secretary",name:"Monali P. Dhakate",meta:"",bio:"Senior Citizens, PM-DAKSH, PCR-PoA"},
+    {level:"Joint Secretary",name:"Parveen Kumar Thind",meta:"",bio:"Backward Classes & SC Division"},
+   ]},
+  {name:"Women & Child Development", cluster:"social", desc:"Policies for economic/social empowerment of women and holistic child development. Runs Mission Shakti, Mission Vatsalya, POSHAN 2.0, Beti Bachao Beti Padhao. Administers Dowry Prohibition Act, POCSO Act.",
+   minister:"Annpurna Devi", mos:"Savitri Thakur",
+   officers:[
+    {level:"Secretary",name:"Anil Malik",meta:"IAS 1991, Haryana",bio:"Took charge early 2025."},
+    {level:"Joint Secretary",name:"Ajeet Kumar",meta:"IAS 2002, MP",bio:"Tenure until Aug 2029"},
+    {level:"Joint Secretary",name:"Radhika Jha",meta:"IAS 2002, Uttarakhand",bio:""},
+   ]},
+  {name:"Tribal Affairs", cluster:"social", desc:"Safeguards Scheduled Tribes' rights. Implements Eklavya Model Residential Schools, Van Dhan Yojana, PVTG development programmes. Manages ST Commission framework and Forest Rights Act support.",
+   minister:"Jual Oram", mos:"Durgadas Uikey",
+   officers:[
+    {level:"Secretary",name:"Ranjana Chopra",meta:"IAS 1994, Odisha",bio:"Assumed charge Nov 2025."},
+    {level:"Joint Secretary",name:"Anant Prakash Pandey",meta:"IFoS 1999, Haryana",bio:"5-year tenure from March 2025"},
+    {level:"Joint Secretary",name:"Naval Kishor",meta:"IOFS 2003",bio:"Appointed Jan 2026"},
+   ]},
+  {name:"Minority Affairs", cluster:"social", desc:"Welfare of notified minorities (Muslims, Christians, Sikhs, Buddhists, Parsis, Jains). Implements PM Jan Vikas Karyakram, minority scholarships, Nai Udaan coaching, Haj pilgrimage management.",
+   minister:"Kiren Rijiju", mos:"George Kurian",
+   officers:[
+    {level:"Secretary",name:"Dr. Srivatsa Krishna",meta:"IAS 1994, Karnataka",bio:"Harvard MBA, former World Bank officer. Moved from Tourism in March 2026."},
+   ]},
+  {name:"Labour & Employment", cluster:"social", desc:"Protects workers' interests through 4 consolidated Labour Codes (Wages, Industrial Relations, Social Security, Occupational Safety). Manages EPFO, ESIC, e-Shram portal for unorganized workers.",
+   minister:"Dr. Mansukh Mandaviya", mos:"Shobha Karandlaje",
+   officers:[
+    {level:"Secretary",name:"Vandana Gurnani",meta:"IAS 1991, Karnataka",bio:"Previously Secretary (Coordination), Cabinet Secretariat."},
+    {level:"Additional Secretary",name:"Ajoy Sharma",meta:"IAS 1999, Punjab",bio:"Promoted from JS"},
+    {level:"Joint Secretary",name:"Ashutosh A.T. Pednekar",meta:"IAS 2002, Rajasthan",bio:"Also DG (Labour Welfare)"},
+   ]},
+
+  // Agriculture & Rural
+  {name:"Agriculture & Farmers' Welfare", cluster:"agri", desc:"Formulates national policies on agriculture, horticulture, crop insurance, farm mechanization, soil health, and farmer welfare. Implements PM-KISAN, PMFBY, RKVY. Coordinates agricultural marketing reforms.",
+   minister:"Shivraj Singh Chouhan", mos:"Ram Nath Thakur; Bhagirath Choudhary",
+   officers:[
+    {level:"Secretary",name:"Atish Chandra",meta:"IAS 1994, Bihar",bio:"Assumed charge Feb 2026. Previously Special Secretary in PMO & CMD of FCI."},
+    {level:"Joint Secretary",name:"Sanjay Kumar Agarwal",meta:"",bio:"Admin, Extension, Pulses Mission"},
+    {level:"Joint Secretary",name:"Priya Ranjan",meta:"",bio:"Horticulture"},
+    {level:"Joint Secretary",name:"Muktanand Agrawal",meta:"",bio:"Plant Protection, CEO-PMFBY"},
+    {level:"Joint Secretary",name:"Neha Verma",meta:"",bio:"Farmers' Welfare"},
+    {level:"Joint Secretary",name:"Anbalagan P.",meta:"",bio:"Policy, MPS & AIF"},
+   ]},
+  {name:"Rural Development", cluster:"agri", desc:"Implements MGNREGA (rural employment guarantee), PMAY-Gramin (rural housing), PM Gram Sadak Yojana (rural roads), National Rural Livelihoods Mission. Aims to improve livelihoods and reduce rural poverty.",
+   minister:"Shivraj Singh Chouhan", mos:"Chandra Sekhar Pemmasani; Kamlesh Paswan",
+   officers:[
+    {level:"Secretary",name:"Rohit Kansal",meta:"IAS 1995, AGMUT",bio:"Appointed March 2026. MBA IIM, BE Mechanical."},
+    {level:"Additional Secretary",name:"Pankaj Yadav",meta:"IAS 2001, Haryana",bio:"Elevated from JS, March 2026"},
+    {level:"Joint Secretary",name:"Swati Sharma",meta:"IAS 2003, UT",bio:"NRLM"},
+   ]},
+  {name:"Consumer Affairs, Food & Public Distribution", cluster:"agri", desc:"Two departments: Consumer Affairs (consumer protection, BIS, price monitoring, National Consumer Helpline) and Food & PD (food security via PDS, NFSA, FCI/CWC, buffer stocks, sugar/edible oil regulation).",
+   minister:"Pralhad Joshi", mos:"B.L. Verma; Nimuben Bambhaniya",
+   officers:[
+    {level:"Secretary (Consumer Affairs)",name:"Nidhi Khare",meta:"IAS 1992, Jharkhand",bio:"In office since April 2024. Also addl charge Secretary, MNRE."},
+    {level:"Secretary (Food & PD)",name:"Sanjeev Chopra",meta:"IAS 1990, Odisha",bio:"MBA (FMS), MSc (LSE), LLB. In office since Oct 2022."},
+    {level:"Joint Secretary",name:"Hanish Chhabra",meta:"IAS 2006, Tamil Nadu",bio:"Appointed Dec 2025"},
+   ]},
+  {name:"Fisheries, Animal Husbandry & Dairying", cluster:"agri", desc:"Two departments: Animal Husbandry & Dairying (livestock sector, dairy via NDDB, animal disease control, National Livestock Mission) and Fisheries (PMMSY, marine/inland fisheries, aquaculture, Blue Revolution).",
+   minister:"Rajiv Ranjan Singh", mos:"S.P. Singh Baghel; George Kurian",
+   officers:[
+    {level:"Secretary (AH&D)",name:"Naresh Pal Gangwar",meta:"IAS 1994, Rajasthan",bio:"Former Agriculture Production Commissioner, Rajasthan."},
+    {level:"Secretary (Fisheries)",name:"Dr. Abhilaksh Likhi",meta:"IAS 1991, Haryana",bio:""},
+    {level:"Joint Secretary",name:"Dr. Muthukumarasamy B.",meta:"IAS 2007, UP",bio:"National Livestock Mission, Scheme Division"},
+   ]},
+  {name:"Panchayati Raj", cluster:"agri", desc:"Strengthens the 3-tier Panchayati Raj system (Gram, Block, District). Implements RGSA for capacity building. Oversees PESA (Scheduled Areas), devolution of funds/functions/functionaries, eGramSwaraj.",
+   minister:"Rajiv Ranjan Singh", mos:"S.P. Singh Baghel",
+   officers:[
+    {level:"Secretary",name:"Vivek Bharadwaj",meta:"IAS 1990, West Bengal",bio:"In office since Nov 2023. Career spans Mines Secretary, J&K administration."},
+    {level:"Joint Secretary",name:"Mamta Varma",meta:"IIS 1994",bio:"Fiscal Devolution/Policy"},
+   ]},
+  {name:"Food Processing Industries", cluster:"agri", desc:"Promotes food processing sector through PM KISAN SAMPADA, PMFME, PLI scheme for food processing. Facilitates Mega Food Parks, cold chain modernization, food testing labs. Aims to reduce post-harvest losses.",
+   minister:"Chirag Paswan", mos:"Ravneet Singh Bittu",
+   officers:[
+    {level:"Secretary",name:"A.P. Das Joshi",meta:"IAS 1994, Assam-Meghalaya",bio:"Appointed July 2025. Previously AS, DoPT."},
+    {level:"Joint Secretary",name:"D. Praveen",meta:"",bio:"International engagement, Bologna trade missions"},
+   ]},
+
+  // Energy & Resources
+  {name:"Power", cluster:"energy", desc:"Responsible for development of electrical energy -- generation, transmission, distribution (thermal, hydro, nuclear). Administers Electricity Act 2003, oversees tariff policies, power sector reforms, energy efficiency programs.",
+   minister:"Manohar Lal Khattar", mos:"Shripad Naik",
+   officers:[
+    {level:"Secretary",name:"Pankaj Agarwal",meta:"IAS 1992, MP",bio:"Also held addl charge of MoRTH and MoHUA."},
+    {level:"Joint Secretary",name:"Mohmmad Afzal",meta:"",bio:""},
+    {level:"Joint Secretary",name:"Shashank Misra",meta:"",bio:"Distribution"},
+    {level:"Joint Secretary",name:"Aadhar Raj",meta:"",bio:"Thermal"},
+   ]},
+  {name:"Coal", cluster:"energy", desc:"Development of coal and lignite resources. Formulates policies for exploration, exploitation, production. Oversees Coal India and subsidiaries, Singareni Collieries. Administers commercial coal mine auctions for energy security.",
+   minister:"G. Kishan Reddy", mos:"Satish Chandra Dubey",
+   officers:[
+    {level:"Secretary",name:"Vikram Dev Dutt",meta:"IAS 1993, AGMUT",bio:"Previously DG of DGCA."},
+    {level:"Joint Secretary",name:"Sanjeev Kumar Kassi",meta:"",bio:""},
+    {level:"Joint Secretary",name:"Manoj Kumar Gangeya",meta:"",bio:""},
+   ]},
+  {name:"Mines", cluster:"energy", desc:"Survey and exploration of all minerals (except oil, gas, atomic). Administers MMDR Act. Oversees Geological Survey of India, Indian Bureau of Mines, Hindustan Copper, NALCO.",
+   minister:"G. Kishan Reddy", mos:"Satish Chandra Dubey",
+   officers:[
+    {level:"Secretary",name:"Piyush Goyal",meta:"IAS 1994, Nagaland",bio:"Former CEO, NATGRID."},
+    {level:"Joint Secretary",name:"Nirupama Kotru",meta:"",bio:"JS & Financial Advisor (also covers Coal)"},
+    {level:"Joint Secretary",name:"Kulveer Singh Yadav",meta:"IOFS 2002",bio:""},
+   ]},
+  {name:"Petroleum & Natural Gas", cluster:"energy", desc:"Policies for exploration, production, refining, distribution of petroleum and natural gas. Oversees ONGC, IOCL, BPCL, HPCL, GAIL. Manages PM Ujjwala Yojana.",
+   minister:"Hardeep Singh Puri", mos:"Suresh Gopi",
+   officers:[
+    {level:"Secretary",name:"Dr. Neeraj Mittal",meta:"IAS 1992, Tamil Nadu",bio:"BTech IIT Kanpur, MBA Cranfield, PhD Ohio State. Former Secretary Telecom."},
+    {level:"Joint Secretary",name:"Sujata Sharma",meta:"IAS 2006, AP",bio:"Marketing & Oil Refinery"},
+    {level:"Joint Secretary",name:"Vinod Seshan",meta:"IAS 2008, Assam",bio:"Govt Nominee Director on ONGC board"},
+   ]},
+  {name:"New & Renewable Energy", cluster:"energy", desc:"Nodal ministry for solar, wind, biogas, biomass, small hydro, hydrogen energy. Drives National Green Hydrogen Mission. Works toward India's 500 GW non-fossil fuel capacity target by 2030.",
+   minister:"Pralhad Joshi", mos:"Shripad Naik",
+   officers:[
+    {level:"Secretary",name:"Santosh Kumar Sarangi",meta:"IAS 1994, Odisha",bio:"MA (Delhi Univ), MPP (Duke). Former DGFT. Also CMD, SECI."},
+    {level:"Joint Secretary",name:"Rajesh Kulhari",meta:"",bio:""},
+    {level:"Joint Secretary",name:"Sanjay Chilwarwar",meta:"",bio:""},
+    {level:"Joint Secretary",name:"J.V.N. Subramanyam",meta:"",bio:""},
+   ]},
+  {name:"Steel", cluster:"energy", desc:"Planning and development of iron & steel industry. Oversees SAIL, RINL, NMDC, MOIL, MSTC. Formulates National Steel Policy, monitors production, trade, and quality standards.",
+   minister:"H.D. Kumaraswamy", mos:"Bhupathi Raju S. Varma",
+   officers:[
+    {level:"Secretary",name:"Sandeep Poundrik",meta:"IAS 1993, Bihar",bio:"BE Electrical, MPA Harvard. Assumed charge Aug 2024."},
+    {level:"Joint Secretary",name:"Daya Nidhan Pandey",meta:"",bio:"Trade & Taxation, Steel Development Institutes"},
+    {level:"Joint Secretary",name:"Abhijit Narendra",meta:"",bio:"Technical Division, SAIL Division"},
+    {level:"Joint Secretary",name:"Vinod K. Tripathi",meta:"",bio:"Industrial Development-2, IEC"},
+    {level:"Joint Secretary",name:"Sudershan Mendiratta",meta:"",bio:"Establishment, RTI, General Admin"},
+   ]},
+  {name:"Heavy Industries", cluster:"energy", desc:"Growth of capital goods, automotive, heavy electrical equipment industries. Implements FAME (EV adoption), PLI for auto & advanced chemistry cells, PM E-Drive scheme.",
+   minister:"H.D. Kumaraswamy", mos:"Bhupathi Raju S. Varma",
+   officers:[
+    {level:"Secretary",name:"Kamran Rizvi",meta:"IAS 1991, UP",bio:""},
+    {level:"Joint Secretary",name:"Vijay Mittal",meta:"IOFS",bio:"Also Chief Vigilance Officer"},
+    {level:"Joint Secretary",name:"Prem Chandra Maurya",meta:"IRS-IT 1995",bio:"Tenure until Jan 2028"},
+   ]},
+  {name:"Chemicals & Fertilizers", cluster:"energy", desc:"Three departments: Chemicals & Petrochemicals (chemical industry growth, PCPIRs), Fertilizers (subsidy regime, NBS scheme, RCF/NFL), Pharmaceuticals (drug pricing, Jan Aushadhi, NIPERs, medical devices).",
+   minister:"J.P. Nadda", mos:"Anupriya Patel",
+   officers:[
+    {level:"Secretary (Chemicals)",name:"Tejveer Singh",meta:"IAS 1994, Punjab",bio:"Assumed charge April 2026."},
+    {level:"Secretary (Fertilizers)",name:"Rajat Kumar Mishra",meta:"IAS 1992, Rajasthan",bio:""},
+    {level:"Secretary (Pharma)",name:"Manoj Joshi",meta:"IAS 1989, Kerala",bio:"BE Mechanical, PGDM. Appointed Jan 2026."},
+    {level:"Joint Secretary",name:"Deepankar Aron",meta:"",bio:"Chemicals"},
+    {level:"Joint Secretary",name:"Deepak Mishra",meta:"",bio:"Petrochemicals"},
+    {level:"Joint Secretary",name:"Dr. Krishna Kant Pathak",meta:"IAS 2001, Rajasthan",bio:"Fertilizers"},
+   ]},
+
+  // Tech & Science
+  {name:"Electronics & IT (MeitY)", cluster:"tech", desc:"Policy for IT, electronics, internet. Drives Digital India, electronics manufacturing (semiconductors, PLI), cybersecurity (CERT-In), NIC, digital public infrastructure (Aadhaar, DigiLocker, UPI), IndiaAI Mission.",
+   minister:"Ashwini Vaishnaw", mos:"Jitin Prasada",
+   officers:[
+    {level:"Secretary",name:"S. Krishnan",meta:"IAS 1989, Tamil Nadu",bio:"35+ year career. PS to Union Finance Minister (2004-07). IMF Senior Advisor. Oversees India Semiconductor & AI Missions."},
+    {level:"AS & DG NIC",name:"Abhishek Singh",meta:"IAS 1995, Nagaland",bio:"Also CEO IndiaAI Mission"},
+    {level:"AS & CEO Semiconductor Mission",name:"Amitesh Kumar Sinha",meta:"IRAS 1997",bio:"Promoted from JS, April 2025"},
+    {level:"Joint Secretary",name:"Sanket S. Bhondve",meta:"IAS 2007, MP",bio:"Digital Governance (NIC, NeGD, MyGov, CSC)"},
+   ]},
+  {name:"Communications -- Telecom", cluster:"tech", desc:"Policy, licensing, regulation for telecommunications. Manages spectrum allocation, telecom operators, 5G rollout, National Broadband Mission. Administers BSNL/MTNL. Digital Communications Commission is apex body.",
+   minister:"Jyotiraditya Scindia", mos:"Chandra Sekhar Pemmasani",
+   officers:[
+    {level:"Secretary",name:"Amit Agrawal",meta:"IAS 1993, Chhattisgarh",bio:"Assumed charge Jan 2026, replacing Neeraj Mittal."},
+   ]},
+  {name:"Communications -- Posts", cluster:"tech", desc:"Operates one of world's largest postal networks (1.5 lakh+ offices). Provides financial services (savings, Sukanya Samriddhi, postal life insurance), India Post Payments Bank, Aadhaar enrollment, passport services.",
+   minister:"Jyotiraditya Scindia", mos:"Chandra Sekhar Pemmasani",
+   officers:[
+    {level:"Secretary & Chair PSB",name:"Vandita Kaul",meta:"",bio:""},
+    {level:"DG Postal Services",name:"Jitendra Gupta",meta:"",bio:""},
+   ]},
+  {name:"Information & Broadcasting", cluster:"tech", desc:"Policies for information, film, broadcasting, press sectors. Oversees Prasar Bharati (AIR + DD), CBFC, Press Council. Regulates cable TV/DTH/OTT. Manages DAVP, Publications Division, Films Division.",
+   minister:"Ashwini Vaishnaw", mos:"Dr. L. Murugan",
+   officers:[
+    {level:"Secretary",name:"Chanchal Kumar",meta:"IAS 1992, Bihar",bio:"Assumed charge April 2026, replacing Sanjay Jaju."},
+    {level:"Special Secretary",name:"Neerja Sekhar",meta:"IAS 1993, Haryana",bio:"Elevated from AS"},
+    {level:"Joint Secretary",name:"Krishna Kumar Nirala",meta:"IAS 2005, Gujarat",bio:""},
+    {level:"Joint Secretary",name:"C. Senthil Rajan",meta:"",bio:"Films"},
+   ]},
+  {name:"Science & Technology -- DST", cluster:"tech", desc:"Promotes new areas of S&T, funds basic/applied research, supports R&D infrastructure (supercomputing, nanotech). Drives quantum technology, geospatial systems, science communication. Oversees SERB, Survey of India.",
+   minister:"(MoS IC) Dr. Jitendra Singh", mos:"",
+   officers:[
+    {level:"Secretary",name:"Prof. Abhay Karandikar",meta:"",bio:""},
+    {level:"Joint Secretary",name:"A. Dhanalakshmi",meta:"",bio:"Administration"},
+   ]},
+  {name:"Science & Technology -- CSIR/DSIR", cluster:"tech", desc:"Promotes industrial R&D and innovation. Manages CSIR -- India's largest R&D org with 37 national labs (genomics to aerospace). Recognizes industry R&D units, promotes technology transfer.",
+   minister:"(MoS IC) Dr. Jitendra Singh", mos:"",
+   officers:[
+    {level:"Secretary & DG CSIR",name:"Dr. N. Kalaiselvi",meta:"Scientist",bio:"First woman DG of CSIR. In office since Aug 2022."},
+   ]},
+  {name:"Science & Technology -- DBT", cluster:"tech", desc:"Promotes biotechnology R&D: agriculture biotech, medical biotech (vaccines, biosimilars), bioenergy, bioinformatics. Oversees BIRAC (startup funding), national missions in bio-manufacturing.",
+   minister:"(MoS IC) Dr. Jitendra Singh", mos:"",
+   officers:[
+    {level:"Secretary",name:"Dr. Rajesh S. Gokhale",meta:"Scientist",bio:""},
+    {level:"Joint Secretary",name:"Ekta Vishnoi",meta:"IRS-IT 1999",bio:""},
+   ]},
+  {name:"Earth Sciences", cluster:"tech", desc:"Weather forecasts, climate services, ocean research, seismological monitoring, polar/cryosphere research. Oversees IMD, INCOIS, NCMRWF. Coordinates Antarctic and Arctic research programs.",
+   minister:"(MoS IC) Dr. Jitendra Singh", mos:"",
+   officers:[
+    {level:"Secretary",name:"Dr. M. Ravichandran",meta:"Scientist",bio:"Extension until May 2026."},
+    {level:"Joint Secretary",name:"D. Senthil Pandiyan",meta:"IAS 2002, Uttarakhand",bio:"JS & CVO. Tenure until May 2026."},
+   ]},
+  {name:"Space (ISRO)", cluster:"tech", desc:"India's space program: satellites (communication, earth observation, NavIC), launch vehicles (PSLV, GSLV, LVM3), planetary exploration (Chandrayaan, Aditya-L1, Gaganyaan). Promotes commercial space via IN-SPACe & NSIL.",
+   minister:"Narendra Modi", mos:"Dr. Jitendra Singh",
+   officers:[
+    {level:"Secretary & ISRO Chairman",name:"Dr. V. Narayanan",meta:"Scientist",bio:"MTech & PhD IIT Kharagpur (Silver Medal). Joined ISRO 1984. Key role in Chandrayaan-3. Padma Shri 2023. Leading Gaganyaan."},
+    {level:"Joint Secretary & FA",name:"Shankari Murali",meta:"ICAS 1991",bio:"Tenure until Feb 2027"},
+   ]},
+  {name:"Atomic Energy", cluster:"tech", desc:"India's nuclear energy program, nuclear research, technology applications. Oversees BARC, NPCIL, TIFR, IMSc. Manages entire nuclear fuel cycle. Civilian applications in medicine, agriculture, industry.",
+   minister:"Narendra Modi", mos:"Dr. Jitendra Singh",
+   officers:[
+    {level:"Secretary & AEC Chairman",name:"Dr. Ajit Kumar Mohanty",meta:"Scientist",bio:"Born 1959, Odisha. BARC Training School 26th Batch (1983). Nuclear physics background."},
+    {level:"Joint Secretary",name:"P.S. Karthigeyan",meta:"",bio:"External Relations & Power"},
+    {level:"Joint Secretary",name:"Anjali Sinha",meta:"",bio:"Industries & Minerals"},
+   ]},
+  {name:"Skill Development & Entrepreneurship", cluster:"tech", desc:"Coordinates all skilling efforts: National Skill Development Mission, PMKVY. Manages NSDC, ITIs, Skill India Digital Hub, NCVET. Aligns workforce with Industry 4.0, AI, green tech, and global mobility demands.",
+   minister:"(MoS IC) Jayant Chaudhary", mos:"",
+   officers:[
+    {level:"Secretary",name:"Debashree Mukherjee",meta:"IAS 1991, AGMUT",bio:"Also Chairperson NCVET. Previously Secretary, Water Resources."},
+    {level:"Joint Secretary",name:"Manasi Sahay Thakur",meta:"IAS 2009, HP",bio:"Harvard MPA. Tenure until Nov 2029."},
+   ]},
+
+  // Governance
+  {name:"Personnel, Public Grievances & Pensions", cluster:"governance", desc:"Three departments: DoPT (IAS cadre management, UPSC coordination, Mission Karmayogi, Central Services), DARPG (admin reforms, CPGRAMS, e-governance), DoPPW (pension policy, Bhavishya portal).",
+   minister:"Narendra Modi", mos:"Dr. Jitendra Singh",
+   officers:[
+    {level:"Secretary (DoPT)",name:"Rachna Shah",meta:"IAS 1991, Kerala",bio:"Former Secretary Textiles. 30+ years across personnel, commerce, finance, planning."},
+    {level:"Secretary (DARPG & Pensions)",name:"Nivedita Shukla Verma",meta:"IAS 1991, UP",bio:"Appointed March-April 2026."},
+    {level:"Establishment Officer & AS",name:"Manisha Saxena",meta:"",bio:"Senior appointments, career management"},
+   ]},
+  {name:"Parliamentary Affairs", cluster:"governance", desc:"Coordinates between Government and Parliament, manages legislative business in both Houses, monitors government assurances, runs Youth Parliament scheme. Liaison with floor leaders.",
+   minister:"Kiren Rijiju", mos:"Arjun Ram Meghwal; Dr. L. Murugan",
+   officers:[
+    {level:"Secretary",name:"Nikunja Bihari Dhal",meta:"IAS 1993, Odisha",bio:"Appointed July 2025."},
+   ]},
+  {name:"Environment, Forest & Climate Change", cluster:"governance", desc:"Policies for environmental protection, forest/wildlife conservation, climate change mitigation. Administers Forest Conservation Act, Wildlife Protection Act. Oversees CPCB, National Clean Air Programme. India's UNFCCC commitments.",
+   minister:"Bhupender Yadav", mos:"Kirti Vardhan Singh",
+   officers:[
+    {level:"Secretary",name:"Tanmay Kumar",meta:"IAS 1993, Rajasthan",bio:"On leave 15-24 Apr; AK Meena holding addl charge."},
+    {level:"Joint Secretary",name:"Tanvi Garg",meta:"IAS 2009, UT",bio:"Tenure up to Jan 2028"},
+   ]},
+  {name:"Culture", cluster:"governance", desc:"Preserves and promotes India's cultural heritage: ASI monuments, museums, libraries, performing arts, literary academies (Sahitya, Sangeet Natak, Lalit Kala). Oversees National Museum, National Archives.",
+   minister:"Gajendra Singh Shekhawat", mos:"Rao Inderjit Singh",
+   officers:[
+    {level:"Secretary",name:"Vivek Aggarwal",meta:"IAS 1994, MP",bio:"Also holds addl charge, Secretary Tourism."},
+    {level:"Joint Secretary",name:"K.K. Mishra",meta:"IRTS 2003",bio:""},
+    {level:"Joint Secretary",name:"Lily Pandeya",meta:"",bio:""},
+   ]},
+  {name:"Tourism", cluster:"governance", desc:"National tourism policy, promotes India domestically and internationally ('Incredible India'). Develops tourism infrastructure, heritage/spiritual/adventure circuits, regulates hospitality standards.",
+   minister:"Gajendra Singh Shekhawat", mos:"Suresh Gopi",
+   officers:[
+    {level:"Secretary",name:"Bhuvnesh Kumar",meta:"IAS 1995, UP",bio:"Appointed March 2026."},
+    {level:"AS & DG",name:"Suman Billa",meta:"IAS 1996, Kerala",bio:""},
+    {level:"Joint Secretary",name:"Harikishore S.",meta:"IAS 2008, Kerala",bio:""},
+   ]},
+  {name:"Youth Affairs & Sports", cluster:"governance", desc:"Department of Sports: Khelo India, SAI, National Sports Federations, NADA, Olympic coordination. Department of Youth Affairs: MY Bharat (formerly NYKS/NSS), youth exchange programs.",
+   minister:"Dr. Mansukh Mandaviya", mos:"Raksha Khadse",
+   officers:[
+    {level:"Secretary (Sports)",name:"Hari Ranjan Rao",meta:"IAS 1994, MP",bio:""},
+    {level:"Joint Secretary",name:"Vineel Krishna Ravella",meta:"IAS 2005, Odisha",bio:"Khelo India. 5-year tenure."},
+    {level:"Joint Secretary",name:"Dr. Shobhit Jain",meta:"IRS 2001",bio:"Policy"},
+   ]},
+  {name:"Textiles", cluster:"governance", desc:"Policy for cotton, jute, silk, wool, handlooms, handicrafts, technical textiles. Administers Textile Commissioner, DCs for Handlooms/Handicrafts, NIFT. Implements PM MITRA mega textile parks.",
+   minister:"Giriraj Singh", mos:"Pabitra Margherita",
+   officers:[
+    {level:"Secretary",name:"Neelam Shami Rao",meta:"IAS 1992, MP",bio:""},
+    {level:"Joint Secretary",name:"Prajakta Verma",meta:"",bio:""},
+    {level:"Joint Secretary",name:"Manisha Chatterjee",meta:"IRTS 1999",bio:"Appointed Jan 2026"},
+    {level:"Joint Secretary",name:"Padmini Singla",meta:"",bio:"Fibre"},
+   ]},
+  {name:"Development of North Eastern Region", cluster:"governance", desc:"Nodal ministry for economic and social development of 8 NE states. Coordinates with North Eastern Council (NEC). Monitors central schemes in NE. Channels 10% Gross Budgetary Support earmarked for NE.",
+   minister:"Jyotiraditya Scindia", mos:"Sukanta Majumdar",
+   officers:[
+    {level:"Secretary",name:"Sanjay Jaju",meta:"IAS 1992, Telangana",bio:"Previously Secretary I&B. Moved here March 2026."},
+    {level:"Joint Secretary",name:"Vipul Aggarwal",meta:"IPS 2001, Gujarat",bio:""},
+   ]},
+  {name:"Statistics & Programme Implementation", cluster:"governance", desc:"Ensures coverage, quality, timeliness of official statistics. Runs National Statistical Office (NSO), GDP estimation, CPI compilation, labour force surveys. Programme Implementation wing monitors Central Sector schemes via PAIMANA.",
+   minister:"(MoS IC) Rao Inderjit Singh", mos:"",
+   officers:[
+    {level:"Secretary",name:"Saurabh Garg",meta:"IAS 1991, Odisha",bio:"On contractual extension until July 2026."},
+   ]},
+  {name:"Defence -- Ex-Servicemen Welfare", cluster:"security", desc:"Welfare of armed forces veterans, war widows, and dependents. Handles pension policy, resettlement/rehabilitation, ECHS (health scheme), Kendriya/Rajya/Zila Sainik Boards.",
+   minister:"Rajnath Singh", mos:"Sanjay Seth",
+   officers:[
+    {level:"Secretary",name:"Sukriti Likhi",meta:"IAS 1993, Haryana",bio:"Assumed charge Nov 2025."},
+    {level:"Joint Secretary",name:"Ajay Kumar",meta:"IP&TAFS 1993",bio:"Tenure till July 2029"},
+   ]},
+]
+};
+
+// ===== RENDER FUNCTIONS =====
+
+function initStats() {
+  const totalJS = DATA.ministries.reduce((sum,m)=> sum + m.officers.filter(o=>o.level.includes('Joint Secretary')||o.level==='Joint Secretary & FA').length, 0);
+  const totalSec = DATA.ministries.reduce((sum,m)=> sum + m.officers.filter(o=>o.level.includes('Secretary') && !o.level.includes('Joint') && !o.level.includes('Additional') && !o.level.includes('Special') && !o.level.includes('Private')).length, 0);
+  const stats = [
+    {num: 31, label: "Cabinet Ministers"},
+    {num: 41, label: "Ministers of State"},
+    {num: totalSec, label: "Secretaries"},
+    {num: totalJS, label: "Joint Secretaries"},
+    {num: DATA.ministries.length, label: "Depts / Ministries"},
+  ];
+  document.getElementById('stats-row').innerHTML = stats.map(s=>`
+    <div class="stat-card"><div class="num">${s.num}</div><div class="label">${s.label}</div></div>
+  `).join('');
+}
+
+function initTicker() {
+  const items = [
+    "Cabinet Secretary: T.V. Somanathan (IAS 1987)",
+    "Home Secretary: Govind Mohan (IAS 1989)",
+    "Finance Secretary: Arunish Chawla (IAS 1992)",
+    "Foreign Secretary: Vikram Misri (IFS 1989)",
+    "Defence Secretary: Rajesh Kumar Singh (IAS 1989)",
+    "ISRO Chairman: Dr. V. Narayanan",
+    "CDS: Gen. Anil Chauhan",
+    "NSA: Ajit Doval, KC",
+    "RBI Governor: (post-Das era)",
+    "NITI Aayog CEO: Nidhi Chhibber (IAS 1994)",
+    "Railway Board Chairman: Satish Kumar (IRSME 1986)",
+  ];
+  const html = items.map(i=>`<span>${i}</span>`).join('');
+  document.getElementById('ticker').innerHTML = html + html;
+}
+
+function initOrgChart() {
+  const el = document.getElementById('org-chart');
+  el.innerHTML = `
+    <div class="h-level"><div class="h-node h-pm"><div class="h-role">Prime Minister</div><div class="h-name">Narendra Modi</div></div></div>
+    <div class="h-connector-v"></div>
+    <div class="h-level" style="gap:4px">
+      <div class="h-node h-top" style="font-size:10px;padding:6px 12px;min-width:130px"><div class="h-role">Principal Secy</div><div class="h-name" style="font-size:13px">P.K. Mishra</div></div>
+      <div class="h-node h-top" style="font-size:10px;padding:6px 12px;min-width:130px"><div class="h-role">Cabinet Secy</div><div class="h-name" style="font-size:13px">T.V. Somanathan</div></div>
+      <div class="h-node h-top" style="font-size:10px;padding:6px 12px;min-width:130px"><div class="h-role">NSA</div><div class="h-name" style="font-size:13px">Ajit Doval</div></div>
+    </div>
+    <div class="h-connector-v"></div>
+    <div style="text-align:center;font-size:10px;color:var(--secondary);text-transform:uppercase;letter-spacing:2px;margin:4px 0">Cabinet Ministers</div>
+    <div class="h-level" style="gap:4px">
+      ${DATA.cabinetMinisters.slice(0,15).map(m=>`<div class="h-node h-cabinet" style="min-width:100px;padding:4px 8px"><div class="h-name">${m.name.split(' ').slice(-1)[0]}</div><div class="h-role" style="font-size:7px">${m.portfolio.split(';')[0].substring(0,25)}</div></div>`).join('')}
+    </div>
+    <div class="h-level" style="gap:4px;margin-top:4px">
+      ${DATA.cabinetMinisters.slice(15).map(m=>`<div class="h-node h-cabinet" style="min-width:100px;padding:4px 8px"><div class="h-name">${m.name.split(' ').slice(-1)[0]}</div><div class="h-role" style="font-size:7px">${m.portfolio.split(';')[0].substring(0,25)}</div></div>`).join('')}
+    </div>
+    <div class="h-connector-v"></div>
+    <div style="text-align:center;font-size:10px;color:var(--secondary);text-transform:uppercase;letter-spacing:2px;margin:4px 0">Secretaries head each Department -- Joint Secretaries handle divisions</div>
+  `;
+}
+
+function initCoM() {
+  document.getElementById('cabinet-grid').innerHTML = DATA.cabinetMinisters.map(m=>`
+    <div class="com-card cabinet-rank">
+      <div class="com-name">${m.name}</div>
+      <div class="com-portfolio">${m.portfolio}</div>
+      <div class="com-bio">${m.bio}</div>
+    </div>
+  `).join('');
+  document.getElementById('mos-ic-grid').innerHTML = DATA.mosIC.map(m=>`
+    <div class="com-card mos-ic">
+      <div class="com-name">${m.name}</div>
+      <div class="com-portfolio">${m.portfolio}</div>
+      <div class="com-bio">${m.bio}</div>
+    </div>
+  `).join('');
+  document.getElementById('mos-grid').innerHTML = DATA.mos.map(m=>`
+    <div class="com-card mos-rank">
+      <div class="com-name">${m.name}</div>
+      <div class="com-portfolio">${m.portfolio}</div>
+      <div class="com-bio">${m.bio}</div>
+    </div>
+  `).join('');
+}
+
+function renderMinistries(filter, search) {
+  const grid = document.getElementById('ministry-grid');
+  let filtered = DATA.ministries;
+  if (filter && filter !== 'all') filtered = filtered.filter(m => m.cluster === filter);
+  if (search) {
+    const q = search.toLowerCase();
+    filtered = filtered.filter(m => {
+      const haystack = [m.name, m.desc, m.minister, m.mos,
+        ...m.officers.map(o => [o.name, o.meta, o.bio, o.level, o.area||''].join(' '))
+      ].join(' ').toLowerCase();
+      return haystack.includes(q);
+    });
+  }
+  document.getElementById('results-count').textContent = `Showing ${filtered.length} of ${DATA.ministries.length} departments`;
+
+  grid.innerHTML = filtered.map((m,i) => `
+    <div class="ministry-card" id="ministry-${i}">
+      <div class="ministry-header" onclick="this.parentElement.classList.toggle('open')">
+        <span class="ministry-cluster-tag ${m.cluster}">${m.cluster}</span>
+        <span class="ministry-name">${m.name}</span>
+        <span class="ministry-minister">${m.minister ? '<strong>'+m.minister+'</strong>' : ''}</span>
+        <span class="expand-icon">+</span>
+      </div>
+      <div class="ministry-body">
+        <div class="dept-desc">${m.desc}</div>
+        ${m.mos ? '<div style="font-size:11px;color:var(--secondary);margin-bottom:12px"><strong>MoS:</strong> '+m.mos+'</div>' : ''}
+        <div class="officers-section">
+          ${renderOfficers(m.officers)}
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderOfficers(officers) {
+  if (!officers.length) return '<div style="color:var(--muted);font-size:11px">No officer data available</div>';
+  let currentLevel = '';
+  let html = '';
+  const levelOrder = ['Prime Minister','Principal Secretary','NSA','Cabinet Secretary','CDS & Secretary','Secretary & ISRO Chairman','Secretary & AEC Chairman','Secretary & Chair PSB','Secretary','Foreign Secretary','Chairman & CEO','Secretary & DG CSIR','Chief Economic Adviser','Vice Chairman','CEO','Secretary (Security)','Secretary (Coordination)','CBDT Chairman','CBIC Chairman','DG Postal Services','Spokesperson','Special Secretary','Additional Secretary','AS & DG NIC','AS & CEO Semiconductor Mission','Mission Director JJM','Additional Secretary & DC','AS & DG','Establishment Officer & AS','Member (Infrastructure)','Member (Operations & BD)','Member (Traction & RS)','Member (Finance)','Joint Secretary','Joint Secretary & FA','Private Secretary to PM'];
+
+  const sorted = [...officers].sort((a,b) => {
+    const ai = levelOrder.findIndex(l => a.level.includes(l));
+    const bi = levelOrder.findIndex(l => b.level.includes(l));
+    return (ai===-1?99:ai) - (bi===-1?99:bi);
+  });
+
+  for (const o of sorted) {
+    let lvl = o.level;
+    if (lvl.includes('Joint Secretary')) lvl = 'Joint Secretaries';
+    else if (lvl.includes('Additional Secretary') || lvl.includes('AS &')) lvl = 'Additional Secretaries';
+    else if (lvl.includes('Member')) lvl = 'Board Members';
+    else lvl = 'Secretary / Head';
+
+    if (lvl !== currentLevel) {
+      currentLevel = lvl;
+      html += `<div class="officer-level">${lvl}</div>`;
+    }
+
+    const initials = o.name.split(' ').map(w=>w[0]).slice(0,2).join('');
+    html += `
+      <div class="officer-row">
+        <div class="officer-avatar">${initials}</div>
+        <div class="officer-info">
+          <div class="officer-name">${o.name}</div>
+          <div class="officer-meta">${o.level}${o.meta ? ' -- ' + o.meta : ''}</div>
+          ${o.bio ? '<div class="officer-bio">'+o.bio+'</div>' : ''}
+          ${o.area ? '<div class="officer-area">'+o.area+'</div>' : ''}
+        </div>
+      </div>
+    `;
+  }
+  return html;
+}
+
+// ===== INIT =====
+document.addEventListener('DOMContentLoaded', () => {
+  initStats();
+  initTicker();
+  initOrgChart();
+  initCoM();
+  renderMinistries('all', '');
+
+  // Search
+  let searchTimeout;
+  document.getElementById('search').addEventListener('input', (e) => {
+    clearTimeout(searchTimeout);
+    searchTimeout = setTimeout(() => {
+      const activeFilter = document.querySelector('.filter-btn.active')?.dataset.filter || 'all';
+      renderMinistries(activeFilter, e.target.value);
+    }, 200);
+  });
+
+  // Filters
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderMinistries(btn.dataset.filter, document.getElementById('search').value);
+    });
+  });
+});
+</script>
+
+</body>
+</html>
