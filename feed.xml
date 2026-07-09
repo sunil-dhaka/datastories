@@ -5,8 +5,15 @@
     <link>https://sunil-dhaka.github.io/datastories/</link>
     <description>Visualizations and narratives from public datasets</description>
     <language>en</language>
-    <lastBuildDate>2026-04-15T00:00:00+05:30</lastBuildDate>
+    <lastBuildDate>2026-07-09T00:00:00+05:30</lastBuildDate>
     <ns0:link href="https://sunil-dhaka.github.io/datastories/feed.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>From Horses to Satellites: A Century of American Farming</title>
+      <link>https://sunil-dhaka.github.io/datastories/american-farming-transformation/</link>
+      <description>In 1900, four in ten Americans lived on a farm; today fewer than two in a hundred do -- yet the land grows six times the corn. A photographic almanac of how machines, techniques, and ownership remade US agriculture from 1900 to today, written for readers who have never seen it.</description>
+      <guid isPermaLink="true">https://sunil-dhaka.github.io/datastories/american-farming-transformation/</guid>
+      <pubDate>2026-07-09T00:00:00+05:30</pubDate>
+    </item>
     <item>
       <title>Who Runs India? The Executive Government Directory</title>
       <link>https://sunil-dhaka.github.io/datastories/india-govt-directory/</link>
