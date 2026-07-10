@@ -5,8 +5,15 @@
     <link>https://sunil-dhaka.github.io/datastories/</link>
     <description>Visualizations and narratives from public datasets</description>
     <language>en</language>
-    <lastBuildDate>2026-07-09T00:00:00+05:30</lastBuildDate>
+    <lastBuildDate>2026-07-10T00:00:00+05:30</lastBuildDate>
     <ns0:link href="https://sunil-dhaka.github.io/datastories/feed.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>The Field and the Ledger: An Economic History of India, Told Through Its Farms</title>
+      <link>https://sunil-dhaka.github.io/datastories/india-farm-economy/</link>
+      <description>In 1700 India produced a quarter of the world's output; by 1950, four percent. Five centuries of the field and the ledger -- Mughal zabt, the Company's drain, famines, the Green and White Revolutions, and the scissors that never closed: 46% of workers, 16% of GDP.</description>
+      <guid isPermaLink="true">https://sunil-dhaka.github.io/datastories/india-farm-economy/</guid>
+      <pubDate>2026-07-10T00:00:00+05:30</pubDate>
+    </item>
     <item>
       <title>From Horses to Satellites: A Century of American Farming</title>
       <link>https://sunil-dhaka.github.io/datastories/american-farming-transformation/</link>
