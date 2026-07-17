@@ -1,0 +1,1025 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Bijli — How India Keeps the Lights On</title>
+<meta name="description" content="From a sodium lamp on your street to a 765 kV tower on the Deccan — a first-principles engineering tour of India's electricity system." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anek+Latin:wght@400;500;600;700;800&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0C0E13;
+  --void:#0F121A;
+  --panel:#161A24;
+  --panel-2:#1D2230;
+  --paper:#F4EFE5;
+  --text:#E4DFD3;
+  --text-dim:#A5A096;
+  --text-faint:#6E6A60;
+  --text-ink:#14110A;
+  --amber:#FFA726;
+  --amber-2:#FFC266;
+  --cyan:#5FB4D1;
+  --lime:#A3D977;
+  --copper:#D88A4A;
+  --red:#E45D52;
+  --rule:rgba(228,223,211,0.10);
+  --rule-2:rgba(228,223,211,0.22);
+  --rule-strong:rgba(228,223,211,0.44);
+  --display:"Anek Latin", system-ui, sans-serif;
+  --serif:"Lora", Georgia, serif;
+  --mono:"JetBrains Mono", ui-monospace, monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;background:var(--ink)}
+body{
+  font-family:var(--serif);font-weight:400;font-size:17px;line-height:1.7;
+  color:var(--text);background:var(--ink);overflow-x:hidden;
+}
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:
+    linear-gradient(90deg, rgba(255,167,38,0.03) 1px, transparent 1px),
+    linear-gradient(rgba(95,180,209,0.025) 1px, transparent 1px);
+  background-size:40px 40px;
+  mask-image: radial-gradient(1200px 800px at 50% 20%, black, transparent 75%);
+}
+body::after{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:
+    radial-gradient(1400px 900px at 10% -10%, rgba(255,167,38,0.10), transparent 60%),
+    radial-gradient(1000px 700px at 100% 30%, rgba(95,180,209,0.07), transparent 60%),
+    radial-gradient(800px 600px at 50% 100%, rgba(163,217,119,0.05), transparent 60%);
+}
+::selection{background:var(--amber);color:var(--ink)}
+a{color:var(--amber);text-decoration:none;border-bottom:1px solid rgba(255,167,38,0.38);transition:color .2s,border-color .2s}
+a:hover{color:var(--cyan);border-color:var(--cyan)}
+
+/* NAV */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:50;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:14px 28px;
+  font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--text-dim);
+  background:linear-gradient(180deg, rgba(12,14,19,0.92), rgba(12,14,19,0));
+  backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--rule);
+}
+.nav .brand{display:flex;align-items:center;gap:14px}
+.nav .brand .mark{
+  width:20px;height:20px;
+  background:linear-gradient(180deg, var(--amber) 0 45%, var(--cyan) 55% 100%);
+  clip-path:polygon(50% 0%, 65% 45%, 100% 45%, 70% 65%, 82% 100%, 50% 75%, 18% 100%, 30% 65%, 0% 45%, 35% 45%);
+}
+.nav .brand b{font-family:var(--display);font-weight:700;font-size:16px;letter-spacing:.01em;color:var(--text);text-transform:none}
+.nav .toc-links{display:flex;gap:20px}
+.nav .toc-links a{border:none;color:var(--text-dim)}
+.nav .toc-links a:hover{color:var(--amber)}
+@media (max-width:900px){.nav .toc-links{display:none}}
+
+/* LAYOUT */
+.wrap{max-width:1240px;margin:0 auto;padding:0 40px;position:relative;z-index:2}
+@media (max-width:760px){.wrap{padding:0 22px}}
+
+/* HERO */
+.hero{
+  min-height:100vh;position:relative;overflow:hidden;
+  display:grid;grid-template-rows:auto 1fr auto;
+  padding:100px 40px 40px;z-index:2;
+}
+.hero .inner{display:flex;flex-direction:column;justify-content:center;max-width:1180px;margin:auto 0;width:100%;padding:60px 0}
+.hero .meta{display:flex;justify-content:space-between;font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--text-dim)}
+.hero .meta .right{text-align:right}
+.hero h1{
+  font-family:var(--display);font-weight:800;
+  font-size:clamp(60px,10vw,160px);line-height:.9;letter-spacing:-.035em;
+  color:var(--text);margin:40px 0 32px;
+}
+.hero h1 .line1{display:block;color:var(--amber)}
+.hero h1 .line2{display:block;color:var(--text)}
+.hero .sub{
+  font-family:var(--serif);font-style:italic;font-weight:400;
+  font-size:clamp(18px,1.7vw,24px);line-height:1.5;max-width:760px;margin-bottom:40px;color:var(--text-dim);
+}
+.hero .sub strong{color:var(--amber);font-weight:500}
+.hero .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:2px;margin-bottom:32px;border:1px solid var(--rule-2)}
+.hero .stats .s{padding:20px 22px;border-right:1px solid var(--rule-2)}
+.hero .stats .s:last-child{border-right:none}
+.hero .stats .s .big{font-family:var(--display);font-weight:700;font-size:34px;color:var(--amber);display:block;line-height:1;margin-bottom:6px}
+.hero .stats .s .lbl{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-dim);line-height:1.45}
+.hero .cta{
+  display:inline-flex;align-items:center;gap:14px;align-self:flex-start;
+  font-family:var(--mono);font-size:12px;letter-spacing:.24em;text-transform:uppercase;
+  border:1.5px solid var(--amber);padding:14px 26px;color:var(--amber);
+  transition:background .25s,color .25s;
+}
+.hero .cta:hover{background:var(--amber);color:var(--ink)}
+
+/* TOC */
+.toc{padding:130px 0 60px;border-top:1px solid var(--rule-2);position:relative;z-index:2}
+.toc-head{display:grid;grid-template-columns:auto 1fr auto;gap:30px;align-items:baseline;margin-bottom:40px;padding-bottom:20px;border-bottom:1px solid var(--rule-2)}
+.toc-head .num{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--text-faint)}
+.toc-head h2{font-family:var(--display);font-weight:700;font-size:clamp(36px,5vw,60px);line-height:1;color:var(--text);letter-spacing:-.02em}
+.toc-head .right{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--text-dim);text-align:right}
+.toc-items{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:0}
+.toc-items a{
+  display:grid;grid-template-columns:54px 1fr;gap:16px;
+  padding:22px 0;border-bottom:1px solid var(--rule);border-top:none;align-items:start;
+}
+.toc-items a:hover{background:rgba(255,167,38,0.05);color:var(--amber)}
+.toc-items a .idx{font-family:var(--mono);font-size:12px;color:var(--text-faint);letter-spacing:.12em;padding-top:6px}
+.toc-items a .ttl{font-family:var(--display);font-weight:600;color:var(--text);font-size:22px;line-height:1.2;letter-spacing:-.01em}
+.toc-items a .ttl em{display:block;margin-top:6px;font-family:var(--serif);font-style:italic;font-weight:400;font-size:14.5px;color:var(--text-dim);line-height:1.45}
+
+/* PART */
+.part{padding:150px 0 40px;position:relative;z-index:2}
+.part-mark{display:grid;grid-template-columns:auto 1fr;gap:40px;align-items:baseline}
+.part-mark .num{font-family:var(--display);font-weight:800;font-size:clamp(120px,16vw,240px);line-height:.85;color:var(--amber);letter-spacing:-.06em}
+.part-mark .label{font-family:var(--mono);font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--text-faint);margin-bottom:16px}
+.part-title{font-family:var(--display);font-weight:700;font-size:clamp(38px,5.5vw,74px);line-height:1.02;letter-spacing:-.02em;max-width:18ch;color:var(--text);margin-top:20px}
+.part-title em{font-style:italic;color:var(--cyan);font-family:var(--serif);font-weight:500}
+.part-lede{max-width:680px;margin-top:24px;font-size:20px;line-height:1.6;color:var(--text-dim);font-weight:400;font-family:var(--serif);font-style:italic}
+
+/* CHAPTER */
+.ch{padding:90px 0;border-top:1px solid var(--rule);position:relative;z-index:2}
+.ch-head{display:grid;grid-template-columns:180px 1fr;gap:40px;align-items:baseline;margin-bottom:40px}
+@media (max-width:760px){.ch-head{grid-template-columns:1fr;gap:12px}}
+.ch-head .marker{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--amber);padding-top:14px}
+.ch-head h3{font-family:var(--display);font-weight:700;font-size:clamp(30px,3.8vw,52px);line-height:1.05;letter-spacing:-.015em;color:var(--text);max-width:22ch}
+.ch-head h3 em{font-style:italic;color:var(--cyan);font-family:var(--serif);font-weight:500}
+
+.ch-body{display:grid;grid-template-columns:180px 1fr;gap:40px}
+@media (max-width:760px){.ch-body{grid-template-columns:1fr;gap:20px}}
+.ch-aside{font-family:var(--mono);font-size:11.5px;line-height:1.65;color:var(--text-dim);letter-spacing:.02em;border-top:1px solid var(--rule);padding-top:14px}
+.ch-aside strong{display:block;font-family:var(--display);font-weight:600;font-size:13px;letter-spacing:.04em;color:var(--amber);margin-bottom:8px;text-transform:uppercase}
+.prose p{margin-bottom:1.1em;font-size:17.5px;line-height:1.75;color:var(--text);font-weight:400}
+.prose p:last-child{margin-bottom:0}
+.prose p.lede{font-size:22px;line-height:1.5;font-weight:500;color:var(--text);margin-bottom:1.3em;font-family:var(--display)}
+.prose p.lede::first-letter{font-family:var(--display);font-weight:800;float:left;font-size:76px;line-height:.85;padding:6px 14px 0 0;color:var(--amber)}
+.prose strong{font-weight:600;color:var(--amber)}
+.prose em{font-style:italic;color:var(--cyan)}
+.prose .term{color:var(--amber);border-bottom:1px dashed rgba(255,167,38,0.45)}
+.prose ul,.prose ol{margin:10px 0 18px 22px;color:var(--text)}
+.prose li{margin-bottom:6px;line-height:1.65}
+
+/* PLATE */
+.plate{margin:34px 0;border:1px solid var(--rule-2);padding:14px;background:var(--void)}
+.plate img{display:block;width:100%;height:auto}
+.plate.light{background:var(--paper);padding:28px}
+.plate.light img{filter:none}
+.plate-cap{display:flex;justify-content:space-between;gap:14px;padding-top:14px;margin-top:14px;border-top:1px solid var(--rule-2);font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;color:var(--text-dim)}
+.plate-cap .title{color:var(--amber);text-transform:uppercase;letter-spacing:.22em}
+.plate-cap .src{color:var(--text-faint)}
+
+/* DIAGRAM */
+.diag{margin:34px 0;border:1px solid var(--rule-2);background:var(--void);padding:28px}
+.diag svg{display:block;width:100%;height:auto;overflow:visible}
+.diag text{font-family:var(--mono);font-size:11px;fill:var(--text)}
+.diag .lbl-big{font-family:var(--display);font-weight:600;font-size:15px;fill:var(--text)}
+.diag .lbl-sm{font-size:10.5px;fill:var(--text-dim);letter-spacing:.08em;text-transform:uppercase}
+.diag-cap{display:flex;justify-content:space-between;padding-top:16px;margin-top:16px;border-top:1px solid var(--rule-2);font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;color:var(--text-dim)}
+.diag-cap .title{color:var(--amber);text-transform:uppercase;letter-spacing:.22em}
+
+/* ANALOGY */
+.analogy{border-left:3px solid var(--amber);padding:22px 26px;margin:30px 0;background:var(--panel);position:relative}
+.analogy::before{content:"IN VIVID FORM";position:absolute;top:-9px;left:18px;background:var(--ink);padding:0 10px;font-family:var(--mono);font-size:10px;letter-spacing:.26em;color:var(--amber)}
+.analogy h4{font-family:var(--display);font-weight:600;font-size:22px;color:var(--text);margin-bottom:10px}
+.analogy p{font-size:16.5px;line-height:1.65;color:var(--text-dim);font-family:var(--serif)}
+
+.quote{font-family:var(--display);font-weight:600;font-size:clamp(26px,3.2vw,42px);line-height:1.2;padding:32px 0;max-width:26ch;color:var(--amber);letter-spacing:-.01em}
+
+/* NUMBERS */
+.numbers{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:0;border:1px solid var(--rule-2);margin:30px 0;background:var(--void)}
+.numbers .n{padding:22px 20px;border-right:1px solid var(--rule-2);border-bottom:1px solid var(--rule-2)}
+.numbers .n:last-child{border-right:none}
+.numbers .n .big{font-family:var(--display);font-weight:700;font-size:32px;line-height:1;color:var(--amber);display:block;margin-bottom:8px;letter-spacing:-.02em}
+.numbers .n .lbl{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-dim);line-height:1.45}
+
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:30px 0}
+@media (max-width:760px){.grid-2{grid-template-columns:1fr}}
+.card{border:1px solid var(--rule-2);padding:22px;background:var(--panel)}
+.card h4{font-family:var(--display);font-weight:600;font-size:20px;color:var(--text);margin-bottom:8px}
+.card.amber{border-top:3px solid var(--amber)}
+.card.cyan{border-top:3px solid var(--cyan)}
+.card.lime{border-top:3px solid var(--lime)}
+.card.copper{border-top:3px solid var(--copper)}
+.card p{color:var(--text-dim);font-size:15.5px;line-height:1.65;font-family:var(--serif)}
+
+/* TABLE */
+table.tbl{width:100%;border-collapse:collapse;margin:26px 0;font-size:14.5px}
+.tbl th,.tbl td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--rule)}
+.tbl thead th{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);border-bottom:1px solid var(--rule-strong)}
+.tbl td.mono{font-family:var(--mono);font-size:13px}
+.tbl tbody tr:hover{background:rgba(255,167,38,0.04)}
+
+/* FOOTER */
+.footer{margin-top:100px;padding:60px 0 40px;border-top:2px solid var(--rule-strong);background:var(--void);position:relative;z-index:2}
+.footer-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:44px}
+@media (max-width:760px){.footer-grid{grid-template-columns:1fr}}
+.footer h4{font-family:var(--display);font-weight:600;font-size:20px;color:var(--text);margin-bottom:10px}
+.footer p,.footer li{font-size:14.5px;color:var(--text-dim);line-height:1.65}
+.footer ul{list-style:none}
+.footer li{padding:3px 0}
+.colophon{margin-top:44px;padding-top:20px;border-top:1px solid var(--rule-2);font-family:var(--mono);font-size:10.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--text-faint);display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+
+/* ANIMATIONS */
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.hero .meta > *,.hero h1 .line1,.hero h1 .line2,.hero .sub,.hero .stats,.hero .cta{animation:rise .9s cubic-bezier(.2,.7,.2,1) both}
+.hero h1 .line1{animation-delay:.15s;display:block}
+.hero h1 .line2{animation-delay:.3s;display:block}
+.hero .sub{animation-delay:.5s}
+.hero .stats{animation-delay:.65s}
+.hero .cta{animation-delay:.8s}
+
+@media (max-width:760px){.ch{padding:60px 0}.part{padding:120px 0 30px}.prose p.lede{font-size:19px}}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="brand"><span class="mark"></span><b>BIJLI — How India Keeps the Lights On</b></div>
+  <div class="toc-links">
+    <a href="#toc">Contents</a>
+    <a href="#part-i">Physics</a>
+    <a href="#part-ii">Generation</a>
+    <a href="#part-iii">Grid</a>
+    <a href="#part-iv">Distribution</a>
+    <a href="#part-v">House</a>
+    <a href="#part-vi">Ops</a>
+  </div>
+  <div>50 Hz · 2026</div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="inner">
+    <div class="meta">
+      <div>An engineering tour · plant to plug</div>
+      <div class="right">Seven chapters · six acts<br/>500 GW · 28 states · one 50 Hz heartbeat</div>
+    </div>
+    <h1>
+      <span class="line1">How India</span>
+      <span class="line2">keeps the lights on.</span>
+    </h1>
+    <p class="sub">From a <strong>765 kV tower</strong> on the Deccan to the sodium lamp on your colony's gate — this is a first-principles engineering tour of how electricity actually gets made, moved, and delivered across the third-largest power system on Earth.</p>
+    <div class="stats">
+      <div class="s"><span class="big">~505 GW</span><span class="lbl">Total installed capacity · end-2025</span></div>
+      <div class="s"><span class="big">1,800 TWh</span><span class="lbl">Annual generation · ~6% of global</span></div>
+      <div class="s"><span class="big">250 GW</span><span class="lbl">Peak demand and rising</span></div>
+      <div class="s"><span class="big">620 M</span><span class="lbl">Blacked out in July 2012 — we'll get there</span></div>
+    </div>
+    <a href="#toc" class="cta">Start with the physics <span>↓</span></a>
+  </div>
+</header>
+
+<!-- TOC -->
+<section id="toc" class="toc">
+  <div class="wrap">
+    <div class="toc-head">
+      <div class="num">§ 000</div>
+      <h2>Contents</h2>
+      <div class="right">6 parts · 7 chapters</div>
+    </div>
+    <div class="toc-items">
+      <a href="#ch01"><span class="idx">§ 1</span><span class="ttl">The physics that powers India<em>Why AC, why 50 Hz, why three phases</em></span></a>
+      <a href="#ch02"><span class="idx">§ 2</span><span class="ttl">How India makes its electricity<em>Coal, hydro, nuclear, solar, wind — the mix</em></span></a>
+      <a href="#ch03"><span class="idx">§ 3</span><span class="ttl">The 765 kV backbone<em>Transmission, HVDC, One Nation One Grid</em></span></a>
+      <a href="#ch04"><span class="idx">§ 4</span><span class="ttl">Substations — nerve ganglia of the grid<em>Transformers, breakers, protection</em></span></a>
+      <a href="#ch05"><span class="idx">§ 5</span><span class="ttl">The last mile — DISCOMs and distribution<em>33 kV → 11 kV → 0.4 kV to your gate</em></span></a>
+      <a href="#ch06"><span class="idx">§ 6</span><span class="ttl">Inside your walls<em>MDB, MCB, RCCB, earthing, and the 30 mA that saves your life</em></span></a>
+      <a href="#ch07"><span class="idx">§ 7</span><span class="ttl">Balance every second<em>Grid operations, the duck curve, and the 2012 blackout</em></span></a>
+    </div>
+  </div>
+</section>
+
+<section id="part-i" class="part">
+  <div class="wrap">
+    <div class="part-mark">
+      <span class="num">I</span>
+      <div>
+        <span class="label">Part One · The Physics</span>
+        <h2 class="part-title">Before the grid, <em>a sine wave</em>.</h2>
+        <p class="part-lede">Every socket in every wall in the country delivers the same thing — a 230-volt sine wave going up and down fifty times a second. Why that shape? Why that frequency? Why the three-phase RYB colour code? The grid's answers to these questions were settled a century ago and have not moved since.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="ch" id="ch01"><div class="wrap">
+  <div class="ch-head">
+    <div class="marker">§ 1 · Part I</div>
+    <h3>The physics that <em>powers India</em> — why AC, why 50 Hz, why three phases.</h3>
+  </div>
+  <div class="ch-body">
+    <aside class="ch-aside">
+      <strong>In 30 seconds</strong>
+      AC won over DC because transformers let it travel at high voltage (low loss) and arrive at low voltage (safe to use). Three phases carry three times the power in four wires. And 50 Hz is a Commonwealth inheritance.
+    </aside>
+    <div class="prose">
+      <p class="lede">Every socket in India delivers the same thing — a <strong>230-volt sine wave oscillating 50 times a second</strong>. That single fact, standardised and maintained across more than 500 GW of generation and a million kilometres of wire, is the starting point of this book. Why that waveform, why that frequency, why not direct current? The answers were settled a hundred years ago, in a bitter industrial fight called the <em>War of Currents</em>.</p>
+
+      <p>Thomas Edison, who had lit Lower Manhattan in 1882 with direct current from the Pearl Street station, insisted that DC was the future. George Westinghouse and Nikola Tesla disagreed. The problem with DC was simple and decisive: at a fixed voltage, DC could not be economically <em>transformed</em>. And without transformation, you had to transmit electricity at the same voltage you used it at — roughly 110 volts. That meant thick copper wires to carry useful current, which meant you couldn't transmit more than a kilometre or two before the losses ate you alive.</p>
+
+      <p>AC, by contrast, could be fed into a transformer — two coils of wire around a shared iron core — and emerge at a much higher or lower voltage, with almost no loss. <strong>Ohmic loss in a wire is I²R</strong>: double the voltage, halve the current, and losses fall by a factor of four. This is the entire engineering case for high-voltage transmission, and it has not changed in 130 years. William Stanley demonstrated the principle publicly in Great Barrington, Massachusetts, in 1886 — 500 volts up, 3,000 volts across town, 100 volts down. The transformer was the killer app, and AC was its natural habitat. Within a decade the war was over.</p>
+
+      <div class="plate light">
+        <img src="assets/3phase-wave.png" alt="Three-phase AC waveform"/>
+        <div class="plate-cap"><span class="title">Fig. 1 · Three sine waves, 120° apart</span><span class="src">Wikimedia Commons · CC BY</span></div>
+      </div>
+
+      <p>What India's wall socket delivers is a voltage that swings from <strong>+325 volts to −325 volts</strong> fifty times a second. The "230 V" is the <span class="term">root-mean-square</span> value — effectively, the equivalent DC voltage that would deliver the same power. Zero crossings happen 100 times per second. If you could see the sine wave you would never call it "alternating" — you would call it breathing.</p>
+
+      <p>Most power in India is delivered as <span class="term">three-phase</span>, which means three separate sine waves offset from each other by <strong>120 degrees</strong>. On Indian equipment the three phases are labelled R, Y, B (red, yellow, blue — a British convention); on newer international equipment you will see L1, L2, L3. Three-phase power has two remarkable properties. First, the <em>total instantaneous power delivered is constant</em> — unlike single-phase, where power pulses at 100 Hz, three-phase motors run smoothly with no torque ripple. Second, you can carry <em>three times the power in four wires</em> (three phases + neutral) instead of six (three independent single-phase pairs). The line-to-line voltage of Indian three-phase is 230 × √3 = <strong>400 volts</strong>.</p>
+
+      <div class="plate light">
+        <img src="assets/transformer.png" alt="Transformer iron core"/>
+        <div class="plate-cap"><span class="title">Fig. 2 · Transformer — two coils, one core</span><span class="src">Wikimedia Commons · CC BY-SA</span></div>
+      </div>
+
+      <p>The <strong>transformer</strong>, the device that won the war for AC, is almost magical in its simplicity. Wind a <em>primary coil</em> of N₁ turns around one side of an iron core, and a <em>secondary coil</em> of N₂ turns around the other. Send AC into the primary. Changing current creates changing magnetic flux, which is channelled through the iron core, which induces a voltage in the secondary. The turns ratio does the rest: <strong>V₂/V₁ = N₂/N₁ = I₁/I₂</strong>. Power is conserved (minus a percent or two of iron and copper losses). A 500-MVA power transformer at a modern Indian substation is about 99% efficient. A distribution transformer at the end of your street is 95 to 98%.</p>
+
+      <p>Three more concepts that will matter later:</p>
+
+      <div class="grid-2">
+        <div class="card amber"><h4>Reactive power</h4><p>When current and voltage are out of phase (because of motors and transformers), some power <em>oscillates</em> back and forth between load and source without doing work. This "reactive power" (measured in VAR) is real and must be supplied — Indian industrial tariffs penalise low power factor (cos φ &lt; 0.9).</p></div>
+        <div class="card cyan"><h4>Skin effect</h4><p>At 50 Hz, AC flows mostly in the outer ~1 cm skin of a conductor, not uniformly across its cross-section. Doesn't matter for normal transmission, but it's one reason HVDC wins for very long hauls.</p></div>
+        <div class="card lime"><h4>Why 50 Hz</h4><p>Historical. Europe and the Commonwealth took 50 Hz from AEG Germany in the 1890s; America took Westinghouse's 60 Hz. India inherited 50 from British-era standards. Both work. Japan famously uses both — 50 Hz Tokyo, 60 Hz Osaka, with frequency converters between.</p></div>
+        <div class="card copper"><h4>What actually travels</h4><p>Electrons in an Indian house wire drift at fractions of a millimetre per second. What travels at nearly the speed of light is the <em>electromagnetic field</em> surrounding the conductor. The wire is a waveguide, not a pipe — and the bulb lights up because the field got there almost instantly, not because the electrons arrived.</p></div>
+      </div>
+
+      <div class="analogy">
+        <h4>Voltage is water pressure, current is flow rate</h4>
+        <p>The water-pipe analogy is older than the grid and still works: a transformer is a hydraulic step-up converter that trades pressure for flow. Lower current in the wire means less "friction" heating the pipe. This is why every high-voltage transmission line exists: the grid is chasing the square of the voltage to kill resistive losses.</p>
+      </div>
+
+      <div class="numbers">
+        <div class="n"><span class="big">50 Hz</span><span class="lbl">India's grid frequency · 100 zero-crossings/sec</span></div>
+        <div class="n"><span class="big">230 / 400 V</span><span class="lbl">Phase-to-neutral / phase-to-phase</span></div>
+        <div class="n"><span class="big">120°</span><span class="lbl">Offset between R, Y, B phases</span></div>
+        <div class="n"><span class="big">V₂/V₁ = N₂/N₁</span><span class="lbl">The transformer equation · the grid's founding law</span></div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<section id="part-ii" class="part">
+  <div class="wrap">
+    <div class="part-mark">
+      <span class="num">II</span>
+      <div>
+        <span class="label">Part Two · Generation</span>
+        <h2 class="part-title">How the <em>kilowatt-hours</em> are made.</h2>
+        <p class="part-lede">India has more than 500 GW of installed capacity. Coal does 70% of the actual work. Solar does most of the new building. Eight different kinds of plant, each answering a different question.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="ch" id="ch02"><div class="wrap">
+  <div class="ch-head">
+    <div class="marker">§ 2 · Part II</div>
+    <h3>How India <em>makes</em> its electricity.</h3>
+  </div>
+  <div class="ch-body">
+    <aside class="ch-aside">
+      <strong>In 30 seconds</strong>
+      India has more than 500 GW of installed capacity. Coal supplies ~70% of actual generation from under half of the capacity. Solar and wind lead new builds. The 2030 target is 500 GW of non-fossil capacity alone.
+    </aside>
+    <div class="prose">
+      <p class="lede">India is the world's <strong>third-largest</strong> electricity producer, behind China and the United States. As of early 2026 the country has about <strong>505 GW</strong> of installed generation capacity, produces about <strong>1,800 terawatt-hours</strong> a year (~6% of global electricity), and peaks at around 250 GW of simultaneous demand. This chapter is how those kilowatt-hours are actually made.</p>
+
+      <p>The first distinction to hold in your head: <strong>installed capacity is not the same as actual generation</strong>. A gigawatt of solar produces about a quarter of what a gigawatt of coal produces, because the sun doesn't shine all day. The two lenses tell different stories.</p>
+
+      <table class="tbl">
+        <thead><tr><th>Source</th><th>Capacity (GW)</th><th>Capacity share</th><th>Generation share</th><th>Typical CF</th></tr></thead>
+        <tbody>
+          <tr><td>Coal thermal</td><td class="mono">~220</td><td class="mono">44%</td><td class="mono">~70%</td><td class="mono">65%</td></tr>
+          <tr><td>Solar PV</td><td class="mono">~150</td><td class="mono">30%</td><td class="mono">~10%</td><td class="mono">19%</td></tr>
+          <tr><td>Wind</td><td class="mono">~48</td><td class="mono">10%</td><td class="mono">~4%</td><td class="mono">22%</td></tr>
+          <tr><td>Large hydro</td><td class="mono">~48</td><td class="mono">10%</td><td class="mono">~10%</td><td class="mono">35%</td></tr>
+          <tr><td>Gas (natural)</td><td class="mono">~25</td><td class="mono">5%</td><td class="mono">~3%</td><td class="mono">~15%</td></tr>
+          <tr><td>Nuclear</td><td class="mono">~8</td><td class="mono">1.5%</td><td class="mono">~3%</td><td class="mono">75%</td></tr>
+          <tr><td>Biomass + others</td><td class="mono">~12</td><td class="mono">2%</td><td class="mono">~2%</td><td class="mono">—</td></tr>
+        </tbody>
+      </table>
+
+      <p>Coal is still the workhorse. India's coal fleet — several hundred units across roughly a hundred large utility stations, from 210-MW subcritical machines built in the 1970s to the newest 800-MW ultra-supercritical monsters — produces ~70% of the country's actual kilowatt-hours. <strong>NTPC Vindhyachal</strong> in Madhya Pradesh is the single largest station: 4,760 MW across thirteen units (210-MW and 500-MW ratings). NTPC (Public Sector) is the biggest generator overall, producing roughly a quarter of all Indian electricity.</p>
+
+      <div class="plate">
+        <img src="assets/vindhyachal.jpg" alt="NTPC Vindhyachal"/>
+        <div class="plate-cap"><span class="title">Plate I · NTPC Vindhyachal · 4,760 MW · India's largest coal station</span><span class="src">Wikimedia Commons · CC-BY-SA</span></div>
+      </div>
+
+      <p>How does a coal plant actually make electricity? The Rankine cycle, which has barely changed since the 1890s:</p>
+
+      <ol style="margin:12px 0 18px 22px;color:var(--text);line-height:1.75">
+        <li>Pulverise coal to talc-fine powder — 75% passes through a 75-micron sieve. Blow it into the furnace with combustion air.</li>
+        <li>Burn it in a fireball at <strong>~1,400 °C</strong>. The furnace walls are a grid of water-filled tubes; the furnace <em>is</em> the boiler.</li>
+        <li>Steam at ~540 °C and ~240 bar (supercritical) drives a multi-stage steam turbine at 3,000 RPM (synchronous with 50 Hz, 2-pole).</li>
+        <li>The turbine spins a three-phase generator. Its exhaust steam is condensed in a giant condenser cooled by water from the adjacent cooling tower.</li>
+        <li>Condensed water goes back to the boiler. Cycle repeats 24/7.</li>
+      </ol>
+
+      <p>Efficiency: ~33% subcritical, ~38% supercritical, ~42% ultra-supercritical. Two-thirds of coal's energy still leaves as heat up the cooling tower. Modern plants also have flue-gas desulphurisation (FGD) being retrofitted post-2021 regulations, and electrostatic precipitators that remove 99%+ of fly ash.</p>
+
+      <div class="plate light">
+        <img src="assets/powerstation.png" alt="Coal power station schematic"/>
+        <div class="plate-cap"><span class="title">Fig. 3 · Anatomy of a coal-fired power station</span><span class="src">Wikimedia Commons · CC-BY-SA</span></div>
+      </div>
+
+      <p>The other players:</p>
+
+      <div class="grid-2">
+        <div class="card cyan"><h4>Hydro · 48 GW</h4><p>Bhakra-Nangal (1963, the original Nehruvian megaproject), Tehri (2006, India's tallest dam at 260 m), Nathpa-Jhakri, Sardar Sarovar. Pumped-storage schemes are growing rapidly — a ~50-GW pipeline is under construction by 2030.</p></div>
+        <div class="card lime"><h4>Nuclear · 7.5 GW</h4><p>NPCIL runs 22 reactors. Most are <em>indigenous PHWRs</em> (Pressurised Heavy Water Reactors) using natural uranium and D₂O moderator — 220, 540, and 700 MW units. Two Russian VVER-1000 reactors operate at Kudankulam (Tamil Nadu), with more coming. India is also commissioning the Prototype Fast Breeder Reactor at Kalpakkam, aimed at the long-promised thorium fuel cycle.</p></div>
+        <div class="card amber"><h4>Solar · ~150 GW</h4><p>From 3 GW in 2014 to over 150 GW by early 2026 — the fastest scale-up in energy history, and India crossed the 50%-non-fossil capacity milestone in mid-2025, five years ahead of its COP pledge. The <em>Bhadla Solar Park</em> in Rajasthan (2.25 GW on 57 km²) was briefly the world's largest. Auction tariffs have fallen to ₹2.50-2.70 per kWh — cheaper than new coal. Rooftop solar is now at ~25 GW and accelerating under PM Surya Ghar.</p></div>
+        <div class="card copper"><h4>Wind · ~48 GW</h4><p>Mostly in the <em>Muppandal</em> region of Tamil Nadu and across Gujarat and Rajasthan. Peak build was 2015-2017; the industry stalled under auction-based tenders and is now recovering with hybrid solar-wind-storage projects.</p></div>
+      </div>
+
+      <div class="plate">
+        <img src="assets/kudankulam.jpg" alt="Kudankulam nuclear plant"/>
+        <div class="plate-cap"><span class="title">Plate II · Kudankulam Nuclear Power Plant, Tamil Nadu · 2×1000 MW VVER</span><span class="src">Wikimedia Commons · CC-BY-SA</span></div>
+      </div>
+
+      <div class="plate">
+        <img src="assets/bhakra.jpg" alt="Bhakra Dam"/>
+        <div class="plate-cap"><span class="title">Plate III · Bhakra Dam · India's first large hydroelectric project · 1963</span><span class="src">Wikimedia Commons · CC-BY-SA</span></div>
+      </div>
+
+      <p>Gas has collapsed. India has about 25 GW of installed gas capacity but runs it at just ~15% capacity factor — most of India's gas plants are <em>stranded</em> because domestic gas is allocated to fertiliser and city gas, and imported LNG at ₹6-8 per kWh can't compete with coal at ₹3-4 or solar at ₹2.50. Gas is now primarily a peaking resource.</p>
+
+      <p>Where is it going? India has pledged <strong>500 GW of non-fossil capacity by 2030</strong> (part of the COP26 climate commitment) — roughly 280 GW solar, 140 GW wind, with nuclear and hydro making up the rest. The <em>National Green Hydrogen Mission</em> aims at 5 million tonnes per year by 2030, which would require roughly 125 GW of dedicated renewables just to power the electrolysers. Coal is projected to peak around 2030, then gradually decline. Meanwhile the <em>Battery Energy Storage Systems</em> (BESS) market is rapidly expanding — bid tariffs fell from ₹10 lakh per MW-month in 2022 to ₹2.2-2.8 lakh by late 2024.</p>
+
+      <div class="plate">
+        <img src="assets/muppandal.jpg" alt="Muppandal wind farm"/>
+        <div class="plate-cap"><span class="title">Plate IV · Muppandal Wind Farm, Kanyakumari · Tamil Nadu</span><span class="src">Wikimedia Commons · CC-BY-SA</span></div>
+      </div>
+
+      <div class="numbers">
+        <div class="n"><span class="big">~505 GW</span><span class="lbl">Total installed capacity · end-2025</span></div>
+        <div class="n"><span class="big">1,400 °C</span><span class="lbl">Coal furnace temperature · talc-fine pulverised coal</span></div>
+        <div class="n"><span class="big">₹2.50 / kWh</span><span class="lbl">Recent solar auction tariffs · cheaper than new coal</span></div>
+        <div class="n"><span class="big">500 GW</span><span class="lbl">Non-fossil capacity target by 2030 · COP26 pledge</span></div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<section id="part-iii" class="part">
+  <div class="wrap">
+    <div class="part-mark">
+      <span class="num">III</span>
+      <div>
+        <span class="label">Part Three · Transmission &amp; Substations</span>
+        <h2 class="part-title">A continent-sized <em>synchronous machine</em>.</h2>
+        <p class="part-lede">22 years of stitching ended on 31 December 2013, when the Southern Region finally synchronised to the rest. Since then every generator in India — from a 500 MW Vindhyachal unit to a 25 kW rooftop solar inverter in Koramangala — has turned at the same 50 Hz beat.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="ch" id="ch03"><div class="wrap">
+  <div class="ch-head">
+    <div class="marker">§ 3 · Part III</div>
+    <h3>The <em>765 kV backbone</em> — transmission and the grid.</h3>
+  </div>
+  <div class="ch-body">
+    <aside class="ch-aside">
+      <strong>In 30 seconds</strong>
+      From a power plant to your town, electricity travels on a voltage ladder — 765 kV, 400 kV, 220 kV, 132 kV, 33 kV — dropping as it gets closer. India's five regional grids were synchronised into one on 31 December 2013.
+    </aside>
+    <div class="prose">
+      <p class="lede">The generator at Vindhyachal spins at 3,000 RPM and produces electricity at about 21,000 volts. By the time that electricity reaches your plug in Kolkata or Pune or Churu, it is at 230 volts. In between lie roughly <strong>175,000 circuit-kilometres</strong> of inter-state transmission line, stepped up and stepped down through six different voltage classes. This is the continent-sized synchronous machine known as the Indian grid.</p>
+
+      <p>The story of how it became one grid is worth telling. India operated <strong>five regional grids</strong> — Northern (NR), Western (WR), Southern (SR), Eastern (ER), and Northeastern (NER) — for most of its post-independence history, stitched together slowly:</p>
+
+      <ul>
+        <li><strong>1991 · NER ↔ ER</strong> — first inter-regional synchronisation.</li>
+        <li><strong>2003 · WR joins</strong> — forms the Central Grid.</li>
+        <li><strong>2006 · NR joins</strong> — the "NEW Grid".</li>
+        <li><strong>31 December 2013 · SR joins</strong> via the 765 kV Raichur–Sholapur line — <em>One Nation, One Grid</em> is complete.</li>
+      </ul>
+
+      <p>Since then, every generator in India has locked to the same 50 Hz beat. A coal unit in Korba, a solar inverter in Bhadla, a VVER turbine at Kudankulam, and a rooftop 5-kW inverter in Bengaluru all turn together. This synchronisation is the ground truth of grid operations — we will come back to it in Chapter 7.</p>
+
+      <h4 style="font-family:var(--display);font-weight:700;font-size:28px;color:var(--amber);margin:36px 0 14px">The voltage ladder</h4>
+
+      <p>Transmission voltages in India are standardised by the Central Electricity Authority. From highest to lowest:</p>
+
+      <table class="tbl">
+        <thead><tr><th>Voltage</th><th>Purpose</th><th>Typical use</th></tr></thead>
+        <tbody>
+          <tr><td class="mono">765 kV AC</td><td>Extra-high-voltage backbone</td><td>Inter-regional transfers; e.g. Raichur–Sholapur</td></tr>
+          <tr><td class="mono">± 800 kV HVDC</td><td>Very long distance</td><td>Biswanath Chariali–Agra (1,728 km, 6,000 MW)</td></tr>
+          <tr><td class="mono">400 kV AC</td><td>Heavy inter-state</td><td>Power-plant evacuation, regional corridors</td></tr>
+          <tr><td class="mono">220 kV</td><td>State-level transmission</td><td>Major cities' bulk feed</td></tr>
+          <tr><td class="mono">132 / 66 kV</td><td>Sub-transmission</td><td>Feeding distribution substations</td></tr>
+          <tr><td class="mono">33 kV</td><td>Primary distribution</td><td>Substation-to-substation inside towns</td></tr>
+          <tr><td class="mono">11 kV</td><td>Medium-voltage street feeder</td><td>Feeds pole-mounted transformers</td></tr>
+          <tr><td class="mono">400 / 230 V</td><td>Low-voltage LT</td><td>Three-phase and single-phase to consumers</td></tr>
+        </tbody>
+      </table>
+
+      <p>A 765 kV tower is a lattice steel structure 60 to 70 metres tall, weighing 40 to 60 tonnes. Each phase is carried by a <em>bundle</em> of four aluminium conductor steel reinforced (ACSR) cables — bundling reduces corona discharge and doubles the effective cross-section. The insulator strings holding the conductors to the tower contain 35 to 45 ceramic or toughened-glass discs, each the size of a dinner plate. On top of every modern tower runs a single earth wire, the <span class="term">OPGW</span> — Optical Ground Wire — which carries both lightning protection and a fibre-optic SCADA link connecting the tower's instruments back to the control centre.</p>
+
+      <div class="diag">
+        <svg viewBox="0 0 900 340" role="img" aria-label="Voltage ladder from plant to plug">
+          <defs>
+            <marker id="v1A" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#FFA726"/></marker>
+          </defs>
+
+          <!-- Stages -->
+          <g>
+            <rect x="30" y="120" width="110" height="80" fill="#FFA726" fill-opacity="0.25" stroke="#FFA726"/>
+            <text x="85" y="150" text-anchor="middle" class="lbl-big" fill="#FFA726">PLANT</text>
+            <text x="85" y="170" text-anchor="middle" class="lbl-sm">generator</text>
+            <text x="85" y="186" text-anchor="middle" class="lbl-sm">21 kV</text>
+
+            <rect x="170" y="120" width="110" height="80" fill="#FFC266" fill-opacity="0.22" stroke="#FFC266"/>
+            <text x="225" y="150" text-anchor="middle" class="lbl-big" fill="#FFC266">STEP UP</text>
+            <text x="225" y="170" text-anchor="middle" class="lbl-sm">transformer</text>
+            <text x="225" y="186" text-anchor="middle" class="lbl-sm">21 → 765 kV</text>
+
+            <rect x="310" y="120" width="150" height="80" fill="#5FB4D1" fill-opacity="0.25" stroke="#5FB4D1"/>
+            <text x="385" y="150" text-anchor="middle" class="lbl-big" fill="#5FB4D1">TRANSMISSION</text>
+            <text x="385" y="170" text-anchor="middle" class="lbl-sm">765 / 400 kV</text>
+            <text x="385" y="186" text-anchor="middle" class="lbl-sm">hundreds to thousands of km</text>
+
+            <rect x="490" y="120" width="130" height="80" fill="#A3D977" fill-opacity="0.25" stroke="#A3D977"/>
+            <text x="555" y="150" text-anchor="middle" class="lbl-big" fill="#A3D977">SUB-TRANS</text>
+            <text x="555" y="170" text-anchor="middle" class="lbl-sm">220 / 132 kV</text>
+            <text x="555" y="186" text-anchor="middle" class="lbl-sm">state-level</text>
+
+            <rect x="650" y="120" width="110" height="80" fill="#D88A4A" fill-opacity="0.25" stroke="#D88A4A"/>
+            <text x="705" y="150" text-anchor="middle" class="lbl-big" fill="#D88A4A">DIST</text>
+            <text x="705" y="170" text-anchor="middle" class="lbl-sm">33 / 11 kV</text>
+            <text x="705" y="186" text-anchor="middle" class="lbl-sm">town feeders</text>
+
+            <rect x="790" y="120" width="80" height="80" fill="#FFA726" fill-opacity="0.35" stroke="#FFA726"/>
+            <text x="830" y="150" text-anchor="middle" class="lbl-big" fill="#FFA726">PLUG</text>
+            <text x="830" y="170" text-anchor="middle" class="lbl-sm">230 V</text>
+          </g>
+
+          <!-- arrows -->
+          <g stroke="#FFA726" stroke-width="1.5" fill="none">
+            <path d="M142 160 L 170 160" marker-end="url(#v1A)"/>
+            <path d="M282 160 L 310 160" marker-end="url(#v1A)"/>
+            <path d="M462 160 L 490 160" marker-end="url(#v1A)"/>
+            <path d="M622 160 L 650 160" marker-end="url(#v1A)"/>
+            <path d="M762 160 L 790 160" marker-end="url(#v1A)"/>
+          </g>
+
+          <!-- ratio labels -->
+          <text x="450" y="50" text-anchor="middle" class="lbl-big">Plant → Plug · voltage drops ~3,300× in five steps</text>
+          <text x="450" y="70" text-anchor="middle" class="lbl-sm">21 kV → 765 kV → 400 kV → 220 kV → 33 kV → 11 kV → 230 V</text>
+
+          <!-- Loss callout -->
+          <text x="450" y="260" text-anchor="middle" class="lbl-big" fill="#FFA726">Why so many steps? Power = V × I. High V = low I = less I²R loss in wires.</text>
+          <text x="450" y="282" text-anchor="middle" class="lbl-sm">Transmission losses at 765 kV &lt; 3% per 1,000 km.</text>
+        </svg>
+        <div class="diag-cap"><span class="title">Fig. 4 · The voltage cascade</span><span>Five step-downs between a generator and your fan</span></div>
+      </div>
+
+      <h4 style="font-family:var(--display);font-weight:700;font-size:28px;color:var(--amber);margin:36px 0 14px">HVDC — when DC wins</h4>
+
+      <p>For very long distances (over ~600 km overhead, over ~80 km submarine), <span class="term">HVDC</span> (High Voltage Direct Current) beats AC. DC has no reactive power, no skin effect, no synchronisation issues, and needs only two conductors instead of three. The trade-off is cost: converter stations at each end cost hundreds of crores. But for long bulk transfers, it pays off fast.</p>
+
+      <p>India's flagship HVDC links:</p>
+
+      <ul>
+        <li><strong>Biswanath Chariali–Agra</strong> (2017) — ±800 kV, <strong>6,000 MW</strong>, 1,728 km. One of the longest HVDC links in the world. Moves hydro from the Northeast to load centres in the Northern and Western regions.</li>
+        <li><strong>Raigarh–Pugalur–Thrissur</strong> (2021) — ±800 kV, 6,000 MW. Connects coal-rich Chhattisgarh to power-hungry Tamil Nadu. Uses <em>Voltage Source Converters</em> (VSC) in the forest sections — a newer technology than the thyristor-based LCCs.</li>
+        <li><strong>Talcher–Kolar</strong> (2003) — ±500 kV, 2,000 MW. The first East-to-South link.</li>
+        <li><strong>Chandrapur–Padghe</strong> (1998), <strong>Rihand–Dadri</strong> (1990), plus several back-to-back HVDCs.</li>
+      </ul>
+
+      <p>The nationally-owned <strong>POWERGRID Corporation of India</strong> (PGCIL) owns roughly 85% of India's inter-state transmission network. At scale: ~175,000 circuit-km of lines, 280+ extra-high-voltage substations, about 500,000 MVA of transformation capacity, and — at the apex — the grid control hierarchy we will meet in Chapter 7.</p>
+
+      <div class="analogy">
+        <h4>765 kV, 11 kV, 230 V — same physics, five orders of magnitude</h4>
+        <p>A 765 kV inter-regional line moves gigawatts between regions. An 11 kV feeder moves megawatts down your street. A 230 V cable moves a few kilowatts into your flat. The physics is identical — voltage, current, Ohm's law. Only the scale changes, and at each scale the engineering constraints (insulation, clearance, cost, safety) look utterly different.</p>
+      </div>
+
+      <div class="numbers">
+        <div class="n"><span class="big">31 Dec 2013</span><span class="lbl">One Nation, One Grid · synchronised at last</span></div>
+        <div class="n"><span class="big">175,000 km</span><span class="lbl">PGCIL inter-state transmission lines</span></div>
+        <div class="n"><span class="big">6,000 MW</span><span class="lbl">Capacity of the Biswanath Chariali–Agra HVDC</span></div>
+        <div class="n"><span class="big">49.9 – 50.05 Hz</span><span class="lbl">Permitted frequency band (IEGC 2023)</span></div>
+      </div>
+    </div>
+  </div>
+</div></section>
+<section class="ch" id="ch04"><div class="wrap">
+  <div class="ch-head">
+    <div class="marker">§ 4 · Part III</div>
+    <h3><em>Substations</em> — the nerve ganglia of the grid.</h3>
+  </div>
+  <div class="ch-body">
+    <aside class="ch-aside">
+      <strong>In 30 seconds</strong>
+      Every electron reaching your ceiling fan passes through four to six substations. Transformers step voltage up or down, circuit breakers clear faults in 40 milliseconds, and the grid literally reconfigures itself around failures.
+    </aside>
+    <div class="prose">
+      <p class="lede">Every electron that reaches your ceiling fan has passed through <strong>four to six substations</strong> — fenced compounds of steel, copper, oil, and silicon compounds where voltage is transformed, where faults are detected and isolated in 40 milliseconds, and where the grid literally reconfigures itself around failures. Walk past the fence of a 400 kV substation at night and you can hear the transformers hum at exactly 100 Hz — twice the grid frequency, because the iron core's magnetostriction pulses every half-cycle.</p>
+
+      <p>Three kinds of substation by function:</p>
+
+      <div class="grid-2">
+        <div class="card amber"><h4>Generating switchyard</h4><p>Attached to a power plant. Steps voltage <em>up</em> from the generator level (11-21 kV) to transmission level (220-765 kV). A Vindhyachal switchyard has thirteen step-up transformer banks.</p></div>
+        <div class="card cyan"><h4>Transmission substation</h4><p>Interfaces between different transmission voltages (e.g. 765/400 kV, 400/220 kV). Home of the largest single assets in the grid — 500 MVA autotransformers.</p></div>
+        <div class="card lime"><h4>Distribution substation</h4><p>33/11 kV for towns, 11/0.4 kV on poles for streets. Owned by the DISCOM, not the transmission company. Vast numbers — roughly 70,000 of them across India.</p></div>
+        <div class="card copper"><h4>GIS vs AIS</h4><p>AIS (Air-Insulated Switchgear) is the open-air switchyard you've seen — cheaper, larger footprint. GIS (Gas-Insulated Switchgear) houses everything in SF₆-filled enclosures — five times more compact, used in cities (Delhi Bamnauli, Mumbai BKC).</p></div>
+      </div>
+
+      <h4 style="font-family:var(--display);font-weight:700;font-size:28px;color:var(--amber);margin:32px 0 14px">The power transformer — king of the switchyard</h4>
+
+      <p>The single most expensive asset in any substation is usually the <strong>power transformer</strong>, accounting for 30-40% of substation cost. A 765/400 kV autotransformer rated at 500 MVA weighs about <strong>350 tonnes</strong>, stands four metres tall, and costs ₹30-50 crore. Its core is assembled from cold-rolled grain-oriented (CRGO) silicon steel laminations only 0.23-0.30 mm thick — individually insulated so eddy currents cannot flow across them. The copper windings wrap around the core in careful disc or helical patterns.</p>
+
+      <p>Inside the tank, the whole assembly sits submerged in ~50,000 litres of <strong>mineral transformer oil</strong>, which does two jobs: it insulates (oil has about ten times the dielectric strength of air) and it cools (circulating through radiators, sometimes pumped and fan-cooled). Cooling classes: <em>ONAN</em> (Oil Natural, Air Natural — convection only), <em>ONAF</em> (adds fans, +25% capacity), <em>OFAF</em> (pumps plus fans). A Buchholz relay at the top detects gas bubbles from internal arcing and trips the transformer offline before the fault escalates.</p>
+
+      <p>Voltage regulation uses an <span class="term">On-Load Tap Changer (OLTC)</span> — a motorised switch that adjusts the turns ratio in about 1.25% steps, typically across ±10% range, <em>without taking the transformer offline</em>. This is what holds your neighbourhood's voltage steady when heavy industrial loads switch on at the factory across town.</p>
+
+      <h4 style="font-family:var(--display);font-weight:700;font-size:28px;color:var(--amber);margin:32px 0 14px">Circuit breakers vs isolators — life-safety discipline</h4>
+
+      <p>Two classes of switch, often confused by the layperson. A <strong>circuit breaker (CB)</strong> is designed to interrupt current — including massive fault currents. Modern <em>SF₆ breakers</em> at 400 kV can interrupt 40-63 kiloamperes in about <strong>40 milliseconds</strong> (two cycles at 50 Hz). They use an arc-quenching flow of sulphur hexafluoride, a gas with three times the dielectric strength of air.</p>
+
+      <p>An <strong>isolator</strong> is an air-gap disconnect that provides a <em>visible break</em> in the circuit for safety. Isolators are not designed to interrupt current — opening an isolator under load would vaporise its blades. The standard operating rule is: <em>open the breaker first, then the isolator</em>. The isolator exists specifically so the maintenance crew can look into the switchyard, see the gap with their own eyes, and trust it with their lives.</p>
+
+      <div class="plate">
+        <img src="assets/sf6-breaker.jpg" alt="SF6 circuit breaker cutaway"/>
+        <div class="plate-cap"><span class="title">Plate V · SF₆ Circuit Breaker, cutaway</span><span class="src">Wikimedia Commons · CC-BY-SA · schematic model</span></div>
+      </div>
+
+      <p>SF₆ is a problematic gas: it has 3× the dielectric strength of air, but it is <strong>23,500 times more potent as a greenhouse gas than CO₂</strong>. Leaks from the world's SF₆ infrastructure now account for a meaningful fraction of global GHG inventories. A new generation of fluoronitrile gases (Novec 4710) is starting to replace SF₆ in 400 kV gear in the 2020s.</p>
+
+      <div class="plate">
+        <img src="assets/gis-420kv.jpg" alt="GIS 420 kV"/>
+        <div class="plate-cap"><span class="title">Plate VI · 420 kV Gas-Insulated Switchgear hall</span><span class="src">Wikimedia Commons · CC-BY-SA</span></div>
+      </div>
+
+      <h4 style="font-family:var(--display);font-weight:700;font-size:28px;color:var(--amber);margin:32px 0 14px">Protection — the grid clears its own faults</h4>
+
+      <p>When a fault occurs (a tree falls on a 33 kV line, a lightning strike hits a 400 kV conductor), the current surges to ten or twenty times normal within microseconds. Without protection, this would burn up transformers, melt conductors, and set the rest of the grid on fire. Protection relays sense the fault and trip the appropriate circuit breaker fast enough to clear it before damage escalates.</p>
+
+      <div class="grid-2">
+        <div class="card amber"><h4>Differential protection</h4><p>Compares current entering and leaving a protected zone (transformer, bus, or line). If they don't match, there is a fault <em>inside</em> the zone. Instant trip. Used for transformers, generators, and busbars.</p></div>
+        <div class="card cyan"><h4>Distance protection</h4><p>Measures apparent impedance (V÷I) to determine how far away a fault is on a line. Zones of progressively longer reach and longer delays coordinate the response — the nearest relay trips first.</p></div>
+        <div class="card lime"><h4>Overcurrent &amp; earth-fault</h4><p>Simple, robust, used widely in distribution. Time-graded so the downstream breaker trips before the upstream one.</p></div>
+        <div class="card copper"><h4>Numerical relays</h4><p>Modern substations use microprocessor-based <em>numerical relays</em> (ABB, Siemens, Schneider, GE). <em>IEC 61850</em> digital substations use fibre-optic GOOSE messages for trip commands in under 4 milliseconds.</p></div>
+      </div>
+
+      <div class="analogy">
+        <h4>Opening an isolator under load vaporises the blades</h4>
+        <p>The entire craft of substation safety is in the sequence. The breaker interrupts the arc — because it is designed to quench kiloamps of arcing current in a puff of SF₆. Only then does the isolator open, providing the maintenance crew with an air gap they can see and trust. Reverse the sequence and you will be the story they tell new engineers.</p>
+      </div>
+
+      <div class="numbers">
+        <div class="n"><span class="big">40 ms</span><span class="lbl">Typical fault-clearing time · 2 cycles at 50 Hz</span></div>
+        <div class="n"><span class="big">500 MVA</span><span class="lbl">Rating of a 765/400 kV autotransformer · 350 tonnes</span></div>
+        <div class="n"><span class="big">23,500 ×</span><span class="lbl">SF₆ global warming potential vs CO₂</span></div>
+        <div class="n"><span class="big">~ 70,000</span><span class="lbl">Distribution substations across India</span></div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<section id="part-iv" class="part">
+  <div class="wrap">
+    <div class="part-mark">
+      <span class="num">IV</span>
+      <div>
+        <span class="label">Part Four · Distribution</span>
+        <h2 class="part-title">The <em>last mile</em>, and who owns it.</h2>
+        <p class="part-lede">Transmission ends at the 33 kV grid substation on the edge of town. Everything after that belongs to one of seventy-odd DISCOMs, whose 11 kV feeders and pole-mounted transformers decide whether your lights actually stay on.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="ch" id="ch05"><div class="wrap">
+  <div class="ch-head">
+    <div class="marker">§ 5 · Part IV</div>
+    <h3>The <em>last mile</em> — DISCOMs and the 11 kV feeder.</h3>
+  </div>
+  <div class="ch-body">
+    <aside class="ch-aside">
+      <strong>In 30 seconds</strong>
+      Transmission ends at the 33 kV grid substation. Seventy-odd DISCOMs run the 11 kV and 400/230 V networks. Most are chronically loss-making. Smart meters are being rolled out to 250 million consumers.
+    </aside>
+    <div class="prose">
+      <p class="lede">Up to now, every wire we have followed has been part of the <em>transmission</em> grid — owned by POWERGRID or a state transco, carrying bulk power between cities and regions. At the 33 kV grid substation on the edge of your town, transmission ends and <strong>distribution</strong> begins. Everything from here to your meter belongs to one of roughly <strong>seventy Distribution Companies (DISCOMs)</strong>, and this last mile is where the grid stops being an engineering miracle and starts being a human institution with all its shortcomings.</p>
+
+      <h4 style="font-family:var(--display);font-weight:700;font-size:26px;color:var(--amber);margin:30px 0 12px">The DISCOM landscape</h4>
+
+      <p>The Electricity Act of 2003 unbundled the old State Electricity Boards into separate <em>generation companies</em> (gencos), <em>transmission companies</em> (transcos), and <em>distribution companies</em> (discoms). Twenty-three years later, the landscape looks like this:</p>
+
+      <ul>
+        <li><strong>State-owned DISCOMs</strong> run most of India. Example: <em>UPPCL</em> in Uttar Pradesh with four regional subsidiaries (DVVNL, MVVNL, PVVNL, PuVVNL). <em>MSEDCL</em> in Maharashtra. <em>TANGEDCO</em> in Tamil Nadu. Typically these struggle financially.</li>
+        <li><strong>Private DISCOMs</strong> run parts of some cities. Mumbai has Tata Power, Adani Electricity, and BEST (municipal). Delhi has BRPL, BYPL, TPDDL (all Tata/Reliance), plus NDMC (government). Ahmedabad and Surat are served by Torrent Power. Kolkata by CESC. Noida by NPCL.</li>
+      </ul>
+
+      <p>Most public DISCOMs are financially stressed. <strong>AT&amp;C (Aggregate Technical and Commercial) losses</strong> — theft plus line losses — run at 15-30% for state discoms, compared to 2-10% for well-run private ones (TPDDL in Delhi, Tata Mumbai, Torrent Ahmedabad). Accumulated DISCOM debt crossed ₹6.5 lakh crore by FY24. Central government bailout schemes keep the system solvent: <em>UDAY</em> (2015), and the current <em>RDSS</em> — Revamped Distribution Sector Scheme — committing ₹3.03 lakh crore through 2026.</p>
+
+      <h4 style="font-family:var(--display);font-weight:700;font-size:26px;color:var(--amber);margin:30px 0 12px">The 33 / 11 / 0.4 kV cascade</h4>
+
+      <p>From the grid substation onwards, the voltage ladder continues its descent:</p>
+
+      <table class="tbl">
+        <thead><tr><th>Voltage</th><th>Where</th><th>What</th></tr></thead>
+        <tbody>
+          <tr><td class="mono">33 kV</td><td>Sub-transmission from grid S/S</td><td>Connects to primary distribution substations</td></tr>
+          <tr><td class="mono">11 kV</td><td>Medium-voltage feeders</td><td>Radial in villages, ring-main in cities; feeds pole-mounted DTs</td></tr>
+          <tr><td class="mono">400 V (3-ph)</td><td>Low-voltage distribution</td><td>Line-to-line voltage on the 4-wire LT line</td></tr>
+          <tr><td class="mono">230 V (1-ph)</td><td>The wall socket</td><td>Line-to-neutral; what every Indian home actually uses</td></tr>
+        </tbody>
+      </table>
+
+      <p>The workhorse at the end of your street is the <strong>distribution transformer (DT)</strong>. Typically oil-immersed, pole-mounted (rural) or pad-mounted (urban), sized from 25 kVA (rural hamlet) to 1,000 kVA (commercial zone). Step-down ratio 11 kV / 433 V. A modest urban neighbourhood might be served by a single 250 kVA DT — enough for about 50 middle-class homes plus street lights. Larger colonies have 500 or 1,000 kVA units.</p>
+
+      <p>Four wires come off the DT: three phases plus a neutral. In Indian convention, the three phases are colour-coded <em>Red, Yellow, Blue</em> (R, Y, B). The neutral is connected to the earth at the DT — a critical safety feature, because when a phase wire accidentally touches ground (say, a branch fell on the line), the earth connection provides the fault-current path that triggers the upstream breaker to trip. Without it, the fault would be undetected and dangerous.</p>
+
+      <h4 style="font-family:var(--display);font-weight:700;font-size:26px;color:var(--amber);margin:30px 0 12px">ABC — the quiet revolution</h4>
+
+      <p>For decades, Indian LT lines were <em>bare aluminium conductor</em> on porcelain pin insulators mounted on wooden or concrete poles. This was cheap and simple but notoriously prone to theft (easy to hook and splice), birds (nesting in porcelain), kites (string conductive when wet), trees, and monkeys. Under the RDSS scheme, DISCOMs are now rapidly converting LT networks to <strong>Aerial Bunched Cable (ABC)</strong> — three phases plus a neutral bundled together inside XLPE insulation, suspended from a messenger wire. ABC virtually eliminates theft and most animal/plant faults in one move.</p>
+
+      <h4 style="font-family:var(--display);font-weight:700;font-size:26px;color:var(--amber);margin:30px 0 12px">Smart metering — the biggest rollout in Indian utility history</h4>
+
+      <p>The <strong>Smart Metering National Programme</strong> targets ~250 million smart meters by 2026 — essentially every Indian consumer. As of early 2026, 100-120 million have been installed. The major vendors: Adani Energy Solutions, Tata Power, Genus Power, Secure Meters, HPL, L&amp;T. The meters communicate over a polyglot of technologies: <em>RF mesh</em> (Wi-SUN), <em>cellular</em> (NB-IoT, LTE-M), and occasionally <em>power-line communication</em> (PLC).</p>
+
+      <p>Smart meters enable a transformation in tariff design. <strong>Time-of-Day (ToD)</strong> tariffs — mandatory for smart-metered consumers since April 2024 — charge different rates at different hours: cheaper at midday (solar surplus), expensive at evening peak (7-10 PM, AC load). Prepaid billing. Remote disconnect. Outage detection without truck-rolls. Demand-response signals. The whole data loop between the consumer and the grid tightens from months to minutes.</p>
+
+      <div class="plate">
+        <img src="assets/indian-meters.jpg" alt="Indian electricity meters"/>
+        <div class="plate-cap"><span class="title">Plate VII · Meter rack at an Indian apartment block</span><span class="src">Wikimedia Commons · CC-BY-SA</span></div>
+      </div>
+
+      <p>Reliability is measured by the <strong>SAIDI</strong> — System Average Interruption Duration Index, in hours of outage per consumer per year. The best-performing urban DISCOMs (TPDDL, Tata Mumbai, Torrent Ahmedabad) achieve 10-20 hours per year. Struggling state DISCOMs frequently exceed 100 hours — one of the largest gaps in service quality between public and private utilities in any country.</p>
+
+      <div class="analogy">
+        <h4>The drum-shaped transformer humming outside the colony</h4>
+        <p>For most Indians, the visible face of the grid is that drum-shaped pole-mounted transformer you walk past on the way to the bus stop — the one with four wires dropping from it, a couple of porcelain insulators on top, and a faint 100 Hz hum. The thing above it is an 11 kV feeder. The thing below it is your neighbourhood. Everything in this chapter, boiled down, is about that transformer.</p>
+      </div>
+
+      <div class="numbers">
+        <div class="n"><span class="big">~ 70</span><span class="lbl">Number of DISCOMs across India</span></div>
+        <div class="n"><span class="big">15 – 30%</span><span class="lbl">AT&amp;C losses for struggling state DISCOMs</span></div>
+        <div class="n"><span class="big">250 M</span><span class="lbl">Smart meters targeted nationally</span></div>
+        <div class="n"><span class="big">11 kV / 433 V</span><span class="lbl">The transformer on your street corner</span></div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<section id="part-v" class="part">
+  <div class="wrap">
+    <div class="part-mark">
+      <span class="num">V</span>
+      <div>
+        <span class="label">Part Five · Your House</span>
+        <h2 class="part-title"><em>Life-safety</em> engineering, at 30 mA.</h2>
+        <p class="part-lede">Everything upstream of your switchboard exists to deliver one deceptively simple thing — a stable 230-volt sine wave at the terminals of your MDB. The last mile is where grid engineering becomes life-safety engineering, measured in milliamperes and milliseconds.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="ch" id="ch06"><div class="wrap">
+  <div class="ch-head">
+    <div class="marker">§ 6 · Part V</div>
+    <h3><em>Inside your walls</em> — MDB, MCB, RCCB, earthing.</h3>
+  </div>
+  <div class="ch-body">
+    <aside class="ch-aside">
+      <strong>In 30 seconds</strong>
+      Every home's Main Distribution Board is a protection ladder. MCBs trip on overcurrent. RCCBs trip on 30 mA of earth leakage within 40 milliseconds — before the current can stop your heart. Earthing is the wire that makes that detection possible.
+    </aside>
+    <div class="prose">
+      <p class="lede">Everything upstream of your switchboard exists to deliver one deceptively simple thing — a stable 230-volt, 50-Hz sine wave at the copper terminals of your Main Distribution Board. The last mile, however, is where grid engineering becomes <em>life-safety</em> engineering. And the numbers that matter are no longer gigawatts and kilovolts but <strong>milliamperes and milliseconds</strong>.</p>
+
+      <h4 style="font-family:var(--display);font-weight:700;font-size:26px;color:var(--amber);margin:24px 0 12px">From the DT to your MDB</h4>
+
+      <p>A <strong>service cable</strong> drops from the LT line (or ABC) outside your building to your meter. For small homes sanctioned up to about 5-7 kW, this is a <em>2-core single-phase</em> cable — one phase wire plus neutral. Larger homes and small commercial premises take a <em>4-core three-phase</em> drop — three phases plus neutral, carrying 400 V line-to-line and 230 V line-to-neutral. HT consumers with sanctioned loads above ~50-150 kW (state-specific) take 11 kV directly from the feeder and have their own private transformer on-premises.</p>
+
+      <p>The cable enters your meter, owned by the DISCOM. Three generations of meters coexist in India today: <em>electromechanical</em> (the old disc meter — being phased out), <em>static/electronic</em> (digital LCD, accurate), and <em>smart</em> (the current rollout — digital plus two-way communications). After the meter, the customer's wiring begins.</p>
+
+      <p>All of it terminates in your <strong>Main Distribution Board (MDB)</strong> — a metal or plastic enclosure usually mounted near the electrical entry, containing the protective devices that guard everything downstream:</p>
+
+      <div class="grid-2">
+        <div class="card amber"><h4>MCCB / Main switch</h4><p>A Moulded Case Circuit Breaker as the whole-house isolator. Rated at 40-100 A for residential.</p></div>
+        <div class="card cyan"><h4>RCCB / RCBO</h4><p>Residual Current Circuit Breaker. <em>This is the device that saves your life.</em> More on it below.</p></div>
+        <div class="card lime"><h4>Distribution bus</h4><p>The busbar behind the MCBs, connecting everything to the mains.</p></div>
+        <div class="card copper"><h4>MCBs (per circuit)</h4><p>Miniature Circuit Breakers for each branch circuit — lighting, sockets, AC, geyser, kitchen. 6-40 A.</p></div>
+      </div>
+
+      <h4 style="font-family:var(--display);font-weight:700;font-size:26px;color:var(--amber);margin:30px 0 12px">The protection ladder — MCB, MCCB, RCCB</h4>
+
+      <p>Three different hazards, three different devices:</p>
+
+      <p><strong>Overload.</strong> If you plug too many appliances into one circuit, current gradually exceeds the rating of the wire. The MCB's <em>bimetallic strip</em> heats up slowly (over tens of seconds at 1.5× rated current), bends, and trips the breaker. Slow is the right response to a slow problem — a brief surge during motor start-up shouldn't trip everything.</p>
+
+      <p><strong>Short circuit.</strong> Live wire touches neutral directly. Current surges to hundreds of amperes in milliseconds. The MCB's <em>magnetic solenoid</em> trips <em>within 10 milliseconds</em>. Fast response to a fast problem.</p>
+
+      <p><strong>Earth fault.</strong> Live wire touches the metal casing of an appliance (the user's geyser, the water pump, the fridge). If a person touches the casing, current flows through their body to earth. This is the lethal case. No overcurrent detector will catch it — the absolute current is often just a few tens of milliamperes, well below the MCB's trip level. The <span class="term">RCCB</span> (Residual Current Circuit Breaker) catches it by comparing the current flowing in <em>live</em> versus the current flowing back in <em>neutral</em>. In a healthy circuit, these are equal. If they differ by more than <strong>30 milliamperes</strong>, some current is leaking to earth (through a human), and the RCCB trips the circuit <em>within 40 milliseconds</em>. 30 mA is below the threshold that stops the heart. 40 ms is faster than the heart's own rhythm. This is what keeps people alive.</p>
+
+      <h4 style="font-family:var(--display);font-weight:700;font-size:26px;color:var(--amber);margin:30px 0 12px">Branch circuits and wire sizing</h4>
+
+      <p>Branch circuits are sized by load. Indian Standard IS 732 caps voltage drop at 3% between the meter and the farthest socket. Typical residential wiring:</p>
+
+      <table class="tbl">
+        <thead><tr><th>Circuit</th><th>MCB rating</th><th>Wire size (copper)</th><th>Examples</th></tr></thead>
+        <tbody>
+          <tr><td>Lighting</td><td class="mono">6 A</td><td class="mono">1.5 mm²</td><td>LED bulbs, fans</td></tr>
+          <tr><td>5-A sockets</td><td class="mono">6-10 A</td><td class="mono">1.5 – 2.5 mm²</td><td>Phone chargers, TV, laptop</td></tr>
+          <tr><td>15/16-A sockets</td><td class="mono">16 A</td><td class="mono">2.5 – 4 mm²</td><td>AC, geyser, fridge, washing machine</td></tr>
+          <tr><td>Kitchen dedicated</td><td class="mono">20-32 A</td><td class="mono">4 – 6 mm²</td><td>Microwave, induction cooktop, oven</td></tr>
+        </tbody>
+      </table>
+
+      <p>Indian wiring colours per IS 11353: <em>Red, Yellow, Blue</em> for the three phases (same RYB used throughout the grid); <em>Black</em> for neutral; <em>Green</em> (or green-yellow stripe) for earth.</p>
+
+      <h4 style="font-family:var(--display);font-weight:700;font-size:26px;color:var(--amber);margin:30px 0 12px">Earthing — the wire that saves your life</h4>
+
+      <p>The earth wire doesn't carry current in normal operation. Its job is to make earth faults <em>detectable</em>. Every metal part of every appliance that could become live under fault — geyser casing, fridge frame, washing-machine chassis, AC outdoor unit — is connected to the earth wire. If a phase wire inside the appliance accidentally touches the metal casing (damaged insulation, water ingress, rodent chewing), the earth wire provides a low-impedance path for the fault current to flow to ground. This path:</p>
+
+      <ul>
+        <li>Trips the upstream breaker within milliseconds (earth fault detected).</li>
+        <li>Prevents the casing from "floating" at 230 V (which would electrocute the next person to touch it).</li>
+        <li>Triggers the RCCB — which senses current imbalance between live and neutral.</li>
+      </ul>
+
+      <p>At the premises, the earth wire connects to an <strong>earth electrode</strong> in an earth pit. Two common types: <em>traditional</em> (3-metre galvanised iron or copper rod buried in a pit, alternating layers of charcoal and salt, watered periodically — lowers soil resistance) and <em>chemical</em> (a GI pipe filled with conductive compound — maintenance-free, increasingly common). Indian Standard IS 3043 targets <em>5 ohms</em> resistance for domestic earthing. Poor earthing (over 20 Ω) means the protection devices may not trip fast enough, and everyone in the house is taking an invisible bet.</p>
+
+      <div class="plate">
+        <img src="assets/indian-socket.png" alt="Indian Type D/M socket"/>
+        <div class="plate-cap"><span class="title">Plate VIII · Indian wall socket — combined Type D + Type M</span><span class="src">Wikimedia Commons · CC-BY-SA</span></div>
+      </div>
+
+      <p>Indian plug standards are a <strong>combined Type D (5 A) and Type M (15 A)</strong> — a single modular socket accepts both round-pin sizes in the same opening. The large round top pin on a plug is always the <em>earth</em> pin, mandated longer than the other two so it makes contact first when plugging in and breaks last when unplugging. This is not a design accident. It is life-safety engineering.</p>
+
+      <h4 style="font-family:var(--display);font-weight:700;font-size:26px;color:var(--amber);margin:30px 0 12px">Typical household electricity numbers</h4>
+
+      <table class="tbl">
+        <thead><tr><th>Appliance</th><th>Rated power</th><th>Typical monthly use</th></tr></thead>
+        <tbody>
+          <tr><td>LED bulb (9 W)</td><td class="mono">9 W</td><td class="mono">~3 kWh</td></tr>
+          <tr><td>Ceiling fan (BLDC)</td><td class="mono">28-35 W</td><td class="mono">~15 kWh</td></tr>
+          <tr><td>Refrigerator (5-star, ~250 L)</td><td class="mono">~130 W avg</td><td class="mono">~50 kWh</td></tr>
+          <tr><td>Split AC (1.5 ton, 5-star)</td><td class="mono">1,500 – 1,900 W</td><td class="mono">~120 kWh (summer)</td></tr>
+          <tr><td>Geyser (15 L)</td><td class="mono">2,000 – 3,000 W</td><td class="mono">~40 kWh</td></tr>
+          <tr><td>Induction cooktop</td><td class="mono">1,500 – 2,000 W</td><td class="mono">~20 kWh</td></tr>
+        </tbody>
+      </table>
+
+      <p>A typical urban family of four consumes <strong>200-600 kWh per month</strong>, paying ₹1,200-6,000 depending on state, slab, and subsidy. Rural farms with free/subsidised agricultural connections often draw less but at crushing tariffs for the DISCOM's balance sheet.</p>
+
+      <h4 style="font-family:var(--display);font-weight:700;font-size:26px;color:var(--amber);margin:30px 0 12px">Rooftop solar and anti-islanding</h4>
+
+      <p>When you install a grid-tied rooftop solar system, a <em>net meter</em> replaces your ordinary meter — it measures energy flowing in both directions. The solar inverter synchronises to the mains 50 Hz and exports any surplus. Critically, grid-tied inverters must implement <strong>anti-islanding</strong> per IEC 62116 / IS 16221: within 2 seconds of the grid going down, the inverter must disconnect. If it failed to, your solar system would continue to back-feed the dead LT line — and a lineworker climbing the pole to fix the "dead" wire upstream would be electrocuted. Anti-islanding is not optional; it is a hardware-level safety requirement every Indian DISCOM enforces before commissioning a rooftop system.</p>
+
+      <div class="analogy">
+        <h4>Without earth, you become the fuse</h4>
+        <p>A live wire touching the metal casing of your geyser is not a rare fault. It is exactly what happens when a screw vibrates loose, a rodent chews insulation, or condensed water shorts a terminal. Without an earth wire, the casing floats at 230 volts and waits. The next person who touches it — barefoot on a wet bathroom floor — becomes the path to ground. With an earth wire, the same fault trips the RCCB within forty milliseconds and the person feels nothing.</p>
+      </div>
+
+      <div class="numbers">
+        <div class="n"><span class="big">30 mA</span><span class="lbl">RCCB trip threshold · below the heart-stopping level</span></div>
+        <div class="n"><span class="big">40 ms</span><span class="lbl">RCCB trip time · faster than the heart's own rhythm</span></div>
+        <div class="n"><span class="big">&lt; 5 Ω</span><span class="lbl">Earth electrode resistance target (IS 3043)</span></div>
+        <div class="n"><span class="big">2 sec</span><span class="lbl">Anti-islanding disconnect window for rooftop solar</span></div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<section id="part-vi" class="part">
+  <div class="wrap">
+    <div class="part-mark">
+      <span class="num">VI</span>
+      <div>
+        <span class="label">Part Six · Operations</span>
+        <h2 class="part-title">Balance, <em>every second</em>.</h2>
+        <p class="part-lede">Electricity cannot be warehoused. Somewhere in the country, a generator must match every bulb and arc furnace in real time — and when that balance breaks, as it did on 30 and 31 July 2012, 620 million people find out.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="ch" id="ch07"><div class="wrap">
+  <div class="ch-head">
+    <div class="marker">§ 7 · Part VI</div>
+    <h3><em>Balance</em> every second — grid operations.</h3>
+  </div>
+  <div class="ch-body">
+    <aside class="ch-aside">
+      <strong>In 30 seconds</strong>
+      Electricity cannot be stored. Supply must equal demand every second, or frequency drifts and cascades begin. India's grid is balanced by a three-tier control hierarchy (NLDC, RLDC, SLDC), a market that settles every 15 minutes, and a fast-response reserve called Free Governor Mode Operation.
+    </aside>
+    <div class="prose">
+      <p class="lede">The Indian grid delivers about 250 GW at peak — enough power to run New York plus Tokyo plus London simultaneously, give or take. And it does so while <strong>producing none of that energy more than a fraction of a second before it is used</strong>. Electricity cannot be warehoused at grid scale. Somewhere in the country, a generator must match every bulb and arc furnace in real time, and when that balance breaks, as it did on 30 and 31 July 2012, 620 million people find out.</p>
+
+      <h4 style="font-family:var(--display);font-weight:700;font-size:26px;color:var(--amber);margin:26px 0 12px">The operator hierarchy</h4>
+
+      <p>Balance is maintained by a three-tier control system:</p>
+
+      <ul>
+        <li><strong>NLDC</strong> — the National Load Despatch Centre in New Delhi. Apex operator. Runs the whole country's grid every 15 minutes.</li>
+        <li><strong>RLDCs</strong> — five Regional Load Despatch Centres (Northern, Western, Southern, Eastern, Northeastern). Coordinate inter-state flows.</li>
+        <li><strong>SLDCs</strong> — ~33 State Load Despatch Centres. Instruct state-level generators and DISCOMs in real time.</li>
+      </ul>
+
+      <p>All three tiers operate under the <strong>Indian Electricity Grid Code (IEGC)</strong> — the rulebook that sets permitted frequency bands (49.9-50.05 Hz), scheduling procedures, and deviation penalties. POSOCO (Power System Operation Corporation) had been carved out of PowerGrid as a separate subsidiary in 2010 and fully demerged as an independent government entity in 2017; in <strong>November 2022</strong> it was renamed <em>Grid Controller of India Limited</em> (brand: <strong>Grid-India</strong>), sharpening the operator's independence from the transmission utility. The governance principle — operator structurally separate from asset-owning transco — tracks the ISO/RTO model used in other large grids.</p>
+
+      <h4 style="font-family:var(--display);font-weight:700;font-size:26px;color:var(--amber);margin:30px 0 12px">The 96-block day</h4>
+
+      <p>The operating day is divided into <strong>96 blocks of 15 minutes each</strong>. For every block, every generator has a <em>scheduled</em> output and every DISCOM has a <em>scheduled</em> drawal. A day ahead, the market clears — generators and DISCOMs submit bids on the Indian Energy Exchange (IEX), PXIL, or HPX, and prices are set for each block. Intra-day, they adjust. In real time, deviations from schedule are settled via <strong>DSM (Deviation Settlement Mechanism)</strong> — you pay a penalty priced off the grid frequency at the moment of your deviation. Under-draw when frequency is low (grid is stressed) and you are <em>rewarded</em>. Over-draw when frequency is low and you are punished. Price signal feeds information.</p>
+
+      <h4 style="font-family:var(--display);font-weight:700;font-size:26px;color:var(--amber);margin:30px 0 12px">Three layers of frequency control</h4>
+
+      <p>Real-time frequency stability sits on three time-scales:</p>
+
+      <div class="grid-2">
+        <div class="card amber"><h4>Primary · 0-30 seconds</h4><p><strong>Free Governor Mode Operation (FGMO)</strong>. Every large generator's governor is set to respond automatically to frequency deviations. Drop frequency by 0.1 Hz and ~4,000-5,000 MW of auto-response kicks in across participating units — entirely without human intervention.</p></div>
+        <div class="card cyan"><h4>Secondary · 30 s – 15 min</h4><p><strong>Automatic Generation Control (AGC)</strong>. Central computers send set-point adjustments every 4 seconds to ~60 GW of participating capacity. India rolled AGC out in the 2020s — a major operational upgrade.</p></div>
+        <div class="card lime"><h4>Tertiary · 15 min+</h4><p>Manual redispatch by operators. Ancillary-services markets (SRAS, TRAS) launched 2022, pay generators to hold reserves ready.</p></div>
+        <div class="card copper"><h4>The clocks</h4><p>A 0.1 Hz deviation lasting a minute means 60 synchronous-cycles of accumulated clock error. For decades, Indian wall clocks drifted by minutes every week from this. Modern GPS-disciplined clocks ended the problem — the grid no longer owes you accurate time.</p></div>
+      </div>
+
+      <h4 style="font-family:var(--display);font-weight:700;font-size:26px;color:var(--amber);margin:30px 0 12px">The merit-order stack</h4>
+
+      <p>At any moment, the grid dispatches generators in <strong>merit order</strong> — cheapest first. The typical stack, from cheapest to most expensive:</p>
+
+      <ol>
+        <li><strong>Must-run renewables</strong> (solar, wind). Zero marginal cost — take everything they produce.</li>
+        <li><strong>Nuclear</strong>. Near-zero marginal cost, must-run.</li>
+        <li><strong>Pithead coal</strong> — ₹1.50-2.50/kWh. Lowest fuel cost (mine-mouth stations).</li>
+        <li><strong>Linkage coal</strong> — ₹3-4/kWh. Coal shipped by rail.</li>
+        <li><strong>Hydro reservoir</strong>. Variable cost near zero, but water has opportunity cost.</li>
+        <li><strong>Natural gas</strong> — ₹6-8/kWh. Limited by fuel availability.</li>
+        <li><strong>Imported LNG / naphtha peakers</strong> — ₹10-15/kWh. Last resort.</li>
+      </ol>
+
+      <p>The <strong>Security Constrained Economic Despatch (SCED)</strong> pilot introduced in April 2019 lets the NLDC swap expensive inter-state units for cheaper ones in real time, respecting transmission constraints. It has saved an estimated ₹1,000-1,500 crore per year.</p>
+
+      <h4 style="font-family:var(--display);font-weight:700;font-size:26px;color:var(--amber);margin:30px 0 12px">The duck curve — and why solar's success is a problem</h4>
+
+      <p>Solar ramps up at 7 AM, peaks around noon, and collapses by 7 PM. Indian residential demand, by contrast, peaks in the evening (7-10 PM) when people turn on ACs and lights after work. As solar capacity has grown past 150 GW, the net demand curve (total demand minus solar) has developed the characteristic <strong>duck curve</strong> shape — belly at noon (solar surplus) and a steep ramp into the evening peak. At peak solar times, net demand is suppressed so much that coal units must back down to minimum, losing money on every MWh. In the 6-9 PM ramp, net demand climbs at 15-20 GW per hour — faster than any other grid in the world. Coal cannot ramp that fast. Gas can, but there is not enough gas. Batteries can, but there are not yet enough batteries.</p>
+
+      <p>The solution being built, rapidly, is <strong>Battery Energy Storage Systems (BESS)</strong>. Bid tariffs for 4-hour BESS have crashed from ₹10 lakh per MW-month in 2022 to ₹2.2-2.8 lakh by 2024. The government's ₹9,400 crore Viability Gap Funding scheme targets 13.2 GWh of BESS deployment by 2030. Alongside, ~50 GW of pumped-hydro storage is being developed — slow to build but very cheap to operate once online.</p>
+
+      <h4 style="font-family:var(--display);font-weight:700;font-size:26px;color:var(--amber);margin:30px 0 12px">The 2012 blackout — a case study</h4>
+
+      <p>On <strong>30 July 2012 at 02:33 IST</strong>, the Northern grid collapsed. A 400 kV line between Bina and Gwalior was out for maintenance. Several northern states (UP, Haryana, Punjab) had been chronically over-drawing from the grid — frequency was sagging. A distance relay on a remaining 400 kV line mis-coordinated and tripped the line on an overload it should have ignored. The cascade began. Within seconds, every synchronous generator in the Northern region had fallen out of step. Around <strong>350 million people</strong> lost power.</p>
+
+      <p>The grid was restored in 15 hours. But on <strong>31 July at 13:00 IST</strong>, a similar sequence hit harder. The Northern, Eastern, and Northeastern regions collapsed together. The Western and Southern regions held, but <strong>about 620 million people across 22 states lost power</strong> — the largest blackout in human history, affecting roughly one in ten humans alive at that moment.</p>
+
+      <p>The root causes were identified by a CERC-commissioned inquiry: chronic over-drawal by northern states, weak inter-state transmission margins, inadequate under-frequency load-shedding schemes, insufficient coordination between SLDCs, and relay mis-coordination on critical lines. The subsequent reforms are why the grid today is safer: stricter deviation penalties, automatic UFLS, real-time monitoring via <strong>Phasor Measurement Units (PMUs)</strong> sampling at 25-50 samples per second, the SCED pilot, the ancillary-services market, and the 2022 separation of Grid-India from POWERGRID to sharpen operator independence.</p>
+
+      <h4 style="font-family:var(--display);font-weight:700;font-size:26px;color:var(--amber);margin:30px 0 12px">The road ahead — 500 GW non-fossil by 2030</h4>
+
+      <p>India's 2030 pledge is <strong>500 GW of non-fossil installed capacity</strong> — roughly 280 GW solar + 140 GW wind + remainder nuclear/hydro. To operate this grid stably will require ~47 GW of battery storage and 20-27 GW of pumped hydro. The <em>Unified Real-Time Dynamic State Measurement</em> (URTDSM) project has deployed <strong>2,000+ PMUs</strong> across PowerGrid's network. AI/ML forecasting of renewable output has cut day-ahead forecast error to 4-6% mean absolute percentage error. The system is getting smarter, faster, and harder to crash. The 2012 blackout, in hindsight, was the pivot — the moment the Indian grid stopped being a national institution and started becoming a digital one.</p>
+
+      <div class="quote">Electricity is the only product on the market that must be consumed in the same instant it is produced. Every second, somewhere in India, a generator spools up or down to make that true.</div>
+
+      <div class="numbers">
+        <div class="n"><span class="big">96</span><span class="lbl">15-minute dispatch blocks per day</span></div>
+        <div class="n"><span class="big">~ 5,000 MW</span><span class="lbl">Primary (FGMO) reserve response for a 0.1 Hz dip</span></div>
+        <div class="n"><span class="big">620 M</span><span class="lbl">People affected by the 31 July 2012 blackout</span></div>
+        <div class="n"><span class="big">2,000+</span><span class="lbl">PMUs deployed for real-time state monitoring</span></div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <h4>About Bijli</h4>
+        <p>A first-principles engineering guide to India's electricity system, written for anyone curious enough to wonder what happens between the switch on your wall and the coal pile at Singrauli. Every number is sourced; every image is CC-licensed or released under GODL-India.</p>
+      </div>
+      <div>
+        <h4>Primary sources</h4>
+        <ul>
+          <li>Central Electricity Authority (CEA) · <em>cea.nic.in</em></li>
+          <li>Grid-India (formerly POSOCO) · grid-india.in</li>
+          <li>POWERGRID Corporation · powergrid.in</li>
+          <li>CERC regulations &amp; orders · cercind.gov.in</li>
+          <li>MNRE &amp; NPCIL · mnre.gov.in · npcil.nic.in</li>
+          <li>IEA India Energy Outlook · iea.org/reports</li>
+          <li>Ember · ember-energy.org</li>
+          <li>Stevenson · <em>Power System Analysis</em>; Weedy · <em>Electric Power Systems</em></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Image credits</h4>
+        <p>Photographs from Wikimedia Commons (CC-BY / CC-BY-SA) and Press Information Bureau / POWERGRID (Government Open Data License — India). Original SVG diagrams drawn for this volume.</p>
+        <p style="margin-top:10px">Fonts: Anek Latin · Lora · JetBrains Mono.</p>
+      </div>
+    </div>
+    <div class="colophon">
+      <div>Bijli · a power-system almanac · 2026</div>
+      <div>Set in Anek Latin · Lora · JetBrains Mono</div>
+      <div>50 Hz, 500 GW, one country</div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

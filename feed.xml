@@ -5,8 +5,15 @@
     <link>https://sunil-dhaka.github.io/datastories/</link>
     <description>Visualizations and narratives from public datasets</description>
     <language>en</language>
-    <lastBuildDate>2026-07-10T00:00:00+05:30</lastBuildDate>
+    <lastBuildDate>2026-07-17T00:00:00+05:30</lastBuildDate>
     <ns0:link href="https://sunil-dhaka.github.io/datastories/feed.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>Bijli: How India Keeps the Lights On</title>
+      <link>https://sunil-dhaka.github.io/datastories/bijli/</link>
+      <description>From a 765 kV tower on the Deccan to the sodium lamp on your colony's gate -- a first-principles engineering tour of the third-largest power system on Earth. 505 GW of capacity, 28 states, and one 50 Hz heartbeat that must be balanced every second of every day.</description>
+      <guid isPermaLink="true">https://sunil-dhaka.github.io/datastories/bijli/</guid>
+      <pubDate>2026-07-17T00:00:00+05:30</pubDate>
+    </item>
     <item>
       <title>The Field and the Ledger: An Economic History of India, Told Through Its Farms</title>
       <link>https://sunil-dhaka.github.io/datastories/india-farm-economy/</link>
